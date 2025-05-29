@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>装机教程 | 装机-爽</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .step-section {
+            padding: 2rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .step-section:last-child {
+            border-bottom: none;
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 1.5rem;
+        }
+        
+        .step-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .step-images {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-images img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .step-detail {
+            color: var(--text);
+        }
+        
+        .step-detail h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .step-detail p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        
+        .step-detail ul {
+            list-style: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .step-detail ol {
+            list-style: decimal;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .step-detail li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-tip {
+            background-color: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .step-warning {
+            background-color: rgba(243, 156, 18, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .step-danger {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--secondary);
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .step-success {
+            background-color: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid #2ecc71;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .step-nav {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+        }
+        
+        .step-progress {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            width: calc(100% - 3rem);
+            position: sticky;
+            top: 80px;
+            z-index: 90;
+        }
+        
+        /* 滚动时的压缩样式 */
+        .step-progress.compact {
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .step-progress h3 {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .step-progress.compact h3 {
+            margin: 0.25rem 0;
+            font-size: 1rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #eee;
+            border-radius: 4px;
+            margin: 1rem 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary);
+            border-radius: 4px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .step-progress.compact .progress-bar {
+            height: 6px;
+            margin: 0.5rem 0;
+        }
+        
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.85rem;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .progress-labels span {
+            text-align: center;
+            position: relative;
+            width: 11.11%; /* 9个步骤，调整宽度为100/9% */
+            font-weight: 500;
+            font-size: 0.8rem; /* 缩小字体以适应更多标签 */
+        }
+        
+        .progress-labels span:first-child {
+            text-align: left;
+        }
+        
+        .progress-labels span:last-child {
+            text-align: right;
+        }
+        
+        .step-progress.compact .progress-labels {
+            font-size: 0.75rem;
+            margin-top: 5px;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            margin: 2rem 0;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .step-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .step-images {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>装机-爽</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="components.html"><i class="fas fa-microchip"></i> 电脑配件</a></li>
+                <li><a href="assembly.html" class="active"><i class="fas fa-tools"></i> 装机教程</a></li>
+                <li><a href="recommendations.html"><i class="fas fa-list-alt"></i> 配置推荐</a></li>
+                <li><a href="troubleshooting.html"><i class="fas fa-wrench"></i> 常见问题</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h2>装机教程</h2>
+            <p>从零开始，一步步教你组装一台属于自己的电脑。无需专业知识，跟着步骤来就能轻松搞定！</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="step-progress">
+            <h3>装机进度</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill" style="width: 11.1%;"></div>
+            </div>
+            <div class="progress-labels">
+                <span>准备</span>
+                <span>CPU</span>
+                <span>内存</span>
+                <span>主板</span>
+                <span>机箱</span>
+                <span>存储</span>
+                <span>电源</span>
+                <span>外设</span>
+                <span>完成</span>
+            </div>
+        </div>
+
+        <!-- 准备工作 -->
+        <section id="step1" class="step-section">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <h2>准备工作</h2>
+            </div>
+            <div class="step-content">
+                <div class="step-detail">
+                    <h3>在开始装机前，需要准备以下物品：</h3>
+                    <ul>
+                        <li>螺丝刀（十字和一字）</li>
+                        <li>防静电手环（推荐使用）</li>
+                        <li>扎带（用于整理线材）</li>
+                        <li>散热硅脂（CPU散热器可能自带）</li>
+                        <li>足够的空间和明亮的灯光</li>
+                    </ul>
+                    
+                    <h3>安全注意事项：</h3>
+                    <ul>
+                        <li>在干燥、无地毯的环境中操作</li>
+                        <li>触摸金属物体释放静电</li>
+                        <li>确保电源已断开</li>
+                        <li>小心处理各种配件，避免用力过大</li>
+                    </ul>
+                    
+                    <div class="step-tip">
+                        <p><i class="fas fa-lightbulb"></i> <strong>小贴士：</strong>在装机前，建议先阅读各个配件的说明书，熟悉每个配件的安装方式。</p>
+                    </div>
+                    
+                    <div class="step-warning">
+                        <p><i class="fas fa-exclamation-triangle"></i> <strong>提醒：</strong>静电是电子设备最大的敌人之一，请务必注意防静电措施。</p>
+                    </div>
+                </div>
+                <div class="step-images">
+                    <!-- 准备工作图片已删除 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 安装CPU -->
+        <section id="step2" class="step-section">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <h2>安装CPU</h2>
+            </div>
+            <div class="step-content">
+                <div class="step-images">
+                    <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="安装CPU">
+                </div>
+                <div class="step-detail">
+                    <h3>按照以下步骤安装CPU：</h3>
+                    <ol>
+                        <li>取出主板，放置在防静电垫或主板包装盒上</li>
+                        <li>找到CPU插槽，打开固定拉杆或压杆</li>
+                        <li>确认CPU缺口与插槽对齐（Intel和AMD有不同的对齐方式）</li>
+                        <li>轻轻放入CPU，不需要用力，CPU会自然落入插槽</li>
+                        <li>放回固定拉杆，锁定CPU位置</li>
+                    </ol>
+                    
+                    <h3>安装CPU散热器：</h3>
+                    <ol>
+                        <li>如果散热器没有预涂硅脂，在CPU表面涂抹少量硅脂（米粒大小）</li>
+                        <li>对准散热器底座与CPU，轻轻放置</li>
+                        <li>按照散热器说明书，固定散热器（通常需要旋转螺丝或按压卡扣）</li>
+                        <li>连接散热器电源线到主板CPU_FAN接口</li>
+                    </ol>
+                    
+                    <div class="step-danger">
+                        <p><i class="fas fa-exclamation-circle"></i> <strong>警告：</strong>安装CPU时切勿用力，错误的安装方向会损坏CPU针脚。如有疑问，请重新确认对齐方式。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 安装内存 -->
+        <section id="step3" class="step-section">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <h2>安装内存</h2>
+            </div>
+            <div class="step-content">
+                <div class="step-detail">
+                    <h3>按照以下步骤安装内存：</h3>
+                    <ol>
+                        <li>确认内存通道（通常用不同颜色标识）</li>
+                        <li>打开内存插槽两端的固定卡扣</li>
+                        <li>确认内存条的缺口与插槽对齐</li>
+                        <li>垂直向下用力按压内存两端，直到卡扣自动合上</li>
+                        <li>检查内存是否安装稳固</li>
+                    </ol>
+                    
+                    <h3>内存安装注意事项：</h3>
+                    <ul>
+                        <li>如果使用两条内存，请安装在相同颜色的插槽以启用双通道</li>
+                        <li>通常插槽编号为1、2、3、4，推荐使用2、4插槽</li>
+                        <li>内存上的金手指需要完全插入插槽</li>
+                    </ul>
+                    
+                    <div class="step-tip">
+                        <p><i class="fas fa-lightbulb"></i> <strong>小贴士：</strong>插入内存时需要一定的力度，不用担心会损坏主板。当听到"咔哒"一声，说明内存已经正确安装。</p>
+                    </div>
+                </div>
+                <div class="step-images">
+                    <img src="https://images.unsplash.com/photo-1562976540-1502c2145186?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="安装内存">
+                </div>
+            </div>
+        </section>
+
+        <!-- 安装主板 -->
+        <section id="step4" class="step-section">
+            <div class="step-header">
+                <div class="step-number">4</div>
+                <h2>安装主板到机箱</h2>
+            </div>
+            <div class="step-content">
+                <div class="step-images">
+                    <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="安装主板">
+                </div>
+                <div class="step-detail">
+                    <h3>按照以下步骤安装主板：</h3>
+                    <ol>
+                        <li>在机箱内安装I/O挡板（主板附带）</li>
+                        <li>确认机箱中的铜柱位置与主板螺丝孔对应，必要时调整</li>
+                        <li>小心将主板放入机箱，I/O接口对准挡板</li>
+                        <li>用螺丝固定主板（注意不要过度拧紧）</li>
+                    </ol>
+                    
+                    <h3>连接前置面板线材：</h3>
+                    <ul>
+                        <li>根据主板说明书，找到前置USB、音频和开关按钮接口</li>
+                        <li>按照主板标识连接各个线材（注意正负极）</li>
+                    </ul>
+                    
+                    <div class="step-warning">
+                        <p><i class="fas fa-exclamation-triangle"></i> <strong>提醒：</strong>前置面板接口连接复杂，可以参考主板说明书上的图解，确保正确连接。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 机箱组件安装 -->
+        <section id="step5" class="step-section">
+            <div class="step-header">
+                <div class="step-number">5</div>
+                <h2>机箱组件安装</h2>
+            </div>
+            <div class="step-content">
+                <div class="step-detail">
+                    <h3>机箱风扇安装：</h3>
+                    <ol>
+                        <li>确认风扇的气流方向（通常风扇上有箭头标识）</li>
+                        <li>前部风扇通常朝内吹（进风），后部和顶部风扇朝外吹（排风）</li>
+                        <li>使用附带的螺丝固定风扇到机箱上</li>
+                        <li>将风扇电源线连接到主板对应接口（通常标记为SYS_FAN）</li>
+                    </ol>
+                    
+                    <h3>散热系统安装：</h3>
+                    <ul>
+                        <li>确认CPU散热器安装牢固且导热硅脂涂抹均匀</li>
+                        <li>如使用水冷，需要安装水冷排和水泵，并连接相应电源</li>
+                        <li>检查所有风扇转向是否正确，确保气流路径畅通</li>
+                    </ul>
+                    
+                    <div class="step-tip">
+                        <p><i class="fas fa-lightbulb"></i> <strong>小贴士：</strong>良好的气流布局可以有效降低系统温度。前部进风，后部出风是最基本的气流布局。</p>
+                    </div>
+                </div>
+                <div class="step-images">
+                    <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="机箱组件安装">
+                </div>
+            </div>
+        </section>
+
+        <!-- 安装显卡和存储设备 -->
+        <section id="step6" class="step-section">
+            <div class="step-header">
+                <div class="step-number">6</div>
+                <h2>显卡和存储设备安装</h2>
+            </div>
+            <div class="step-content">
+                <div class="step-images">
+                    <img src="https://images.unsplash.com/photo-1591405351990-4726e331f141?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="显卡和存储设备">
+                </div>
+                <div class="step-detail">
+                    <h3>显卡安装步骤：</h3>
+                    <ol>
+                        <li>找到主板上的PCIe x16插槽（通常是第一个也是最长的PCIe插槽）</li>
+                        <li>移除机箱对应位置的PCIe挡板</li>
+                        <li>将显卡对准插槽，确保缺口对齐</li>
+                        <li>用适当力度垂直插入，直到听到"咔哒"声</li>
+                        <li>用螺丝将显卡支架固定在机箱上</li>
+                        <li>如有需要，连接额外的PCIe供电线（6针或8针）</li>
+                    </ol>
+                    
+                    <h3>存储设备安装：</h3>
+                    <h4>SSD/HDD安装：</h4>
+                    <ol>
+                        <li>找到机箱中的硬盘架或SSD安装位置</li>
+                        <li>使用螺丝或免工具支架固定硬盘</li>
+                        <li>连接SATA数据线到主板（标记为SATA0、SATA1等）</li>
+                        <li>连接SATA电源线到硬盘</li>
+                    </ol>
+                    
+                    <h4>M.2 SSD安装：</h4>
+                    <ol>
+                        <li>找到主板上的M.2插槽</li>
+                        <li>将M.2 SSD对准插槽（通常呈30-45度角插入）</li>
+                        <li>轻轻按压直至平躺，然后用螺丝固定</li>
+                    </ol>
+                    
+                    <h3>光驱安装（如需）：</h3>
+                    <ol>
+                        <li>移除机箱前面板对应的光驱挡板</li>
+                        <li>将光驱从机箱前部滑入</li>
+                        <li>用螺丝固定光驱</li>
+                        <li>连接SATA数据线和SATA电源线</li>
+                    </ol>
+                    
+                    <div class="step-warning">
+                        <p><i class="fas fa-exclamation-triangle"></i> <strong>提醒：</strong>安装显卡时请确保用力均匀，避免晃动。大型显卡可能需要额外的支撑架防止下垂。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 电源安装和线缆管理 -->
+        <section id="step7" class="step-section">
+            <div class="step-header">
+                <div class="step-number">7</div>
+                <h2>电源安装和线缆管理</h2>
+            </div>
+            <div class="step-content">
+                <div class="step-detail">
+                    <h3>按照以下步骤安装电源：</h3>
+                    <ol>
+                        <li>确认机箱中电源的安装位置（通常在机箱底部或顶部）</li>
+                        <li>根据机箱设计，决定电源风扇朝内还是朝外（通常建议风扇朝外）</li>
+                        <li>将电源放入机箱，对准螺丝孔</li>
+                        <li>用螺丝将电源固定在机箱上</li>
+                    </ol>
+                    
+                    <h3>连接电源线材：</h3>
+                    <ul>
+                        <li><strong>主板供电</strong>：连接24针主电源和8针CPU供电线</li>
+                        <li><strong>显卡供电</strong>：连接6针或8针PCI-E供电线</li>
+                        <li><strong>存储设备</strong>：连接SATA电源线到硬盘、SSD和光驱</li>
+                        <li><strong>风扇供电</strong>：连接机箱风扇电源（如果不是直接连接主板）</li>
+                    </ul>
+                    
+                    <h3>线缆管理技巧：</h3>
+                    <ol>
+                        <li>使用机箱背面的线缆通道和理线孔</li>
+                        <li>按照线缆类型分组（电源线、数据线、控制线）</li>
+                        <li>使用扎带固定线缆束</li>
+                        <li>避免线缆阻挡风扇或覆盖散热器</li>
+                        <li>保持气流畅通，提高散热效率</li>
+                    </ol>
+                    
+                    <div class="step-tip">
+                        <p><i class="fas fa-lightbulb"></i> <strong>小贴士：</strong>良好的线缆管理不仅美观，还能提高散热效率，减少灰尘堆积，延长硬件寿命。</p>
+                    </div>
+                </div>
+                <div class="step-images">
+                    <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="电源安装和线缆管理">
+                </div>
+            </div>
+        </section>
+
+        <!-- 外设连接 -->
+        <section id="step8" class="step-section">
+            <div class="step-header">
+                <div class="step-number">8</div>
+                <h2>外设连接</h2>
+            </div>
+            <div class="step-content">
+                <div class="step-images">
+                    <img src="https://images.unsplash.com/photo-1593152167544-085d3b9c4938?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="外设连接">
+                </div>
+                <div class="step-detail">
+                    <h3>显示器连接：</h3>
+                    <ul>
+                        <li>根据显卡和显示器接口选择合适的线缆（HDMI、DisplayPort、DVI等）</li>
+                        <li>如果使用核显，则连接到主板的视频输出接口</li>
+                        <li>如果使用独立显卡，则连接到显卡的接口</li>
+                    </ul>
+                    
+                    <h3>键盘和鼠标：</h3>
+                    <ul>
+                        <li>连接到主板后置的USB接口</li>
+                        <li>如果是无线键鼠，安装接收器并确保电池已装好</li>
+                    </ul>
+                    
+                    <h3>音频设备：</h3>
+                    <ul>
+                        <li>扬声器或耳机连接到主板后置的音频输出接口（绿色）</li>
+                        <li>麦克风连接到麦克风接口（粉色）</li>
+                        <li>也可通过前置音频面板连接</li>
+                    </ul>
+                    
+                    <h3>其他外设：</h3>
+                    <ul>
+                        <li>打印机、扫描仪等USB设备插入任意可用USB接口</li>
+                        <li>网线连接到主板后置的网络接口</li>
+                        <li>如有无线网卡，安装天线</li>
+                    </ul>
+                    
+                    <div class="step-tip">
+                        <p><i class="fas fa-lightbulb"></i> <strong>小贴士：</strong>后期可能需要安装相应的驱动程序才能使外设正常工作，特别是特殊功能的键盘、鼠标和打印机。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 完成装机（原来的步骤6改为步骤9） -->
+        <section id="step9" class="step-section">
+            <div class="step-header">
+                <div class="step-number">9</div>
+                <h2>完成装机</h2>
+            </div>
+            <div class="step-content">
+                <div class="step-images">
+                    <!-- 完成装机图片已删除 -->
+                </div>
+                <div class="step-detail">
+                    <h3>最后步骤：</h3>
+                    <ol>
+                        <li>安装显卡：将显卡插入主板PCIe插槽并固定</li>
+                        <li>安装存储设备：将SSD/HDD固定在机箱位置，连接SATA数据线到主板</li>
+                        <li>检查所有连接：确保各个组件都已正确安装并连接</li>
+                        <li>整理走线：使用扎带整理电源线材，确保不阻碍风扇转动</li>
+                        <li>安装机箱侧板：确认没有线材卡在边缘，安装机箱侧板</li>
+                    </ol>
+                    
+                    <h3>开机测试：</h3>
+                    <ul>
+                        <li>连接显示器、键盘、鼠标到电脑</li>
+                        <li>连接电源线并开机</li>
+                        <li>进入BIOS检查各个组件是否被正确识别</li>
+                        <li>安装操作系统</li>
+                    </ul>
+                    
+                    <div class="step-tip">
+                        <p><i class="fas fa-lightbulb"></i> <strong>小贴士：</strong>第一次开机时，建议只连接必要的组件（CPU、内存、显卡、系统盘），确认系统可以启动后再安装其他设备。</p>
+                    </div>
+                    
+                    <div class="step-success">
+                        <p><i class="fas fa-check-circle"></i> <strong>恭喜！</strong>如果一切顺利，你的电脑应该已经可以正常启动了。接下来就是安装操作系统和必要的驱动程序。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="cta">
+        <div class="container">
+            <h2>遇到装机问题？</h2>
+            <p>别担心！查看我们的常见问题解答，或参考配置推荐获取更多帮助。</p>
+            <div class="cta-buttons">
+                <a href="troubleshooting.html" class="btn">常见问题解答 <i class="fas fa-wrench"></i></a>
+                <a href="recommendations.html" class="btn btn-alt">配置推荐 <i class="fas fa-list-alt"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>装机-爽</h2>
+                    <p>小白装机指南，让装机变得简单</p>
+                </div>
+                <div class="footer-links">
+                    <h3>快速导航</h3>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="components.html">电脑配件</a></li>
+                        <li><a href="assembly.html">装机教程</a></li>
+                        <li><a href="recommendations.html">配置推荐</a></li>
+                        <li><a href="troubleshooting.html">常见问题</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 装机-爽 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // 装机教程页面特定脚本
+        document.addEventListener('DOMContentLoaded', () => {
+            const steps = document.querySelectorAll('.step-section');
+            const progressFill = document.getElementById('progress-fill');
+            const progressBar = document.querySelector('.step-progress');
+            const scrollThreshold = 300; // 滚动超过300px就变小
+            
+            // 验证步骤数与标签数是否一致
+            const progressLabels = document.querySelectorAll('.progress-labels span');
+            console.log(`步骤数: ${steps.length}, 标签数: ${progressLabels.length}`);
+            
+            // 初始状态 - 页面顶部时显示大尺寸
+            if (window.scrollY > scrollThreshold) {
+                progressBar.classList.add('compact');
+            } else {
+                progressBar.classList.remove('compact');
+            }
+            
+            let currentStep = 1;
+            const totalSteps = steps.length;
+            
+            // 更新进度条
+            function updateProgress() {
+                // 确保进度从1开始到100结束
+                const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
+                progressFill.style.width = `${progress}%`;
+                
+                // 在控制台输出当前进度信息，便于调试
+                console.log(`当前步骤: ${currentStep}/${totalSteps}, 进度: ${progress}%`);
+            }
+            
+            // 检测当前可见步骤 - 改进的检测逻辑
+            function detectVisibleStep() {
+                let visible = 1;
+                const windowHeight = window.innerHeight;
+                const scrollTop = window.scrollY || window.pageYOffset;
+                const scrollMid = scrollTop + windowHeight / 2;
+                
+                // 判断是否接近页面底部
+                const scrollHeight = document.documentElement.scrollHeight;
+                const scrollPosition = scrollTop + windowHeight;
+                const scrollThresholdToBottom = 300;
+                
+                // 如果接近页面底部，返回最后一个步骤
+                if (scrollHeight - scrollPosition < scrollThresholdToBottom) {
+                    return totalSteps;
+                }
+                
+                steps.forEach((step, index) => {
+                    const rect = step.getBoundingClientRect();
+                    const offsetTop = scrollTop + rect.top;
+                    const offsetBottom = offsetTop + rect.height;
+                    
+                    // 如果步骤在视口中占据主要部分，或者步骤的中点接近视口中点
+                    if ((offsetTop < scrollMid && offsetBottom > scrollMid) || 
+                        (Math.abs((offsetTop + offsetBottom)/2 - scrollMid) < windowHeight * 0.25)) {
+                        visible = index + 1;
+                    }
+                });
+                return visible;
+            }
+            
+            // 基于滚动位置调整进度条大小和检测当前步骤
+            function handleScroll() {
+                const scrollY = window.scrollY || window.pageYOffset;
+                const scrollHeight = document.documentElement.scrollHeight;
+                const windowHeight = window.innerHeight;
+                const scrollPosition = scrollY + windowHeight;
+                
+                // 根据滚动位置决定进度条大小
+                if (scrollY > scrollThreshold) {
+                    progressBar.classList.add('compact');
+                } else {
+                    progressBar.classList.remove('compact');
+                }
+                
+                // 判断是否接近页面底部
+                if (scrollHeight - scrollPosition < 100) {
+                    // 接近底部时强制显示最后一步
+                    currentStep = totalSteps;
+                } else {
+                    // 否则使用正常检测逻辑
+                    currentStep = detectVisibleStep();
+                }
+                
+                updateProgress();
+            }
+            
+            // 监听滚动事件
+            window.addEventListener('scroll', handleScroll);
+            
+            // 初始化 - 触发一次滚动事件以更新当前位置
+            window.dispatchEvent(new Event('scroll'));
+        });
+    </script>
+</body>
+</html> 

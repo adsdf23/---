@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配件排名 | 装机-爽</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .ranking-table {
+            margin: 30px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .ranking-number {
+            font-weight: bold;
+            font-size: 1.2em;
+            text-align: center;
+        }
+        .ranking-notes {
+            margin-top: 40px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            padding: 15px;
+        }
+        .note {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .note i {
+            font-size: 1.5em;
+            margin-right: 15px;
+            color: #0066cc;
+        }
+        .ranking-tabs {
+            margin-top: 30px;
+        }
+        .nav-tabs {
+            border-bottom: 2px solid #ddd;
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-wrap: wrap;
+            overflow-x: auto;
+        }
+        .nav-tabs .nav-item {
+            margin-right: 10px;
+        }
+        .nav-tabs .nav-link {
+            border: none;
+            color: #495057;
+            font-weight: bold;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .nav-tabs .nav-link.active {
+            border-bottom: 3px solid #0066cc;
+            color: #0066cc;
+        }
+        .tab-content {
+            padding: 20px 0;
+        }
+        .tab-pane {
+            display: none;
+        }
+        .tab-pane.show.active {
+            display: block;
+        }
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1587831990711-23ca6441447b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .page-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .page-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table thead th {
+            background-color: #f8f9fa;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: bold;
+            color: #495057;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .table tbody td {
+            padding: 12px 15px;
+            border-top: 1px solid #e9ecef;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+        
+        /* 分页和数据加载样式 */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .pagination li {
+            margin: 0 5px;
+        }
+        .pagination a {
+            display: block;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            color: #0066cc;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .pagination a:hover {
+            background-color: #f8f9fa;
+        }
+        .pagination a.active {
+            background-color: #0066cc;
+            color: white;
+            border-color: #0066cc;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+        }
+        .loading i {
+            animation: spin 1s linear infinite;
+        }
+        
+        /* 搜索和筛选样式 */
+        .filter-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 10px 15px;
+            padding-right: 40px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .search-box i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+        .filter-dropdown {
+            flex: 0 0 auto;
+        }
+        .filter-dropdown select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+        }
+        
+        .price-highlight {
+            font-weight: bold;
+            color: #e63946;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .filter-controls {
+                flex-direction: column;
+            }
+            .table-responsive {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>装机-爽</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="components.html"><i class="fas fa-microchip"></i> 电脑配件</a></li>
+                <li><a href="assembly.html"><i class="fas fa-tools"></i> 装机教程</a></li>
+                <li><a href="recommendations.html"><i class="fas fa-list-alt"></i> 配置推荐</a></li>
+                <li><a href="rankings.html" class="active"><i class="fas fa-trophy"></i> 配件排名</a></li>
+                <li><a href="troubleshooting.html"><i class="fas fa-wrench"></i> 常见问题</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h2>配件排名</h2>
+            <p>以下排名基于性价比、稳定性和用户评价综合评定。请注意，排名会随着市场变化和新品发布而更新。</p>
+            <p class="mt-2"><small>本页面收录了每个组件类别前200名的产品，可通过搜索、筛选和分页查看所有数据。首次访问时数据会自动加载。</small></p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="ranking-tabs">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#motherboard-ranking" role="tab">主板</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#memory-ranking" role="tab">内存条</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#cpu-ranking" role="tab">CPU</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#gpu-ranking" role="tab">显卡</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#storage-ranking" role="tab">硬盘</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#optical-ranking" role="tab">光驱</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#cooling-ranking" role="tab">散热风扇</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#case-ranking" role="tab">机箱</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#power-ranking" role="tab">电源</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#monitor-ranking" role="tab">显示器</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#peripheral-ranking" role="tab">鼠标和键盘</a>
+                </li>
+            </ul>
+            
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="motherboard-ranking" role="tabpanel">
+                    <h2>主板排名 (2025年第二季度)</h2>
+                    
+                    <div class="filter-controls">
+                        <div class="search-box">
+                            <input type="text" id="mb-search" placeholder="搜索主板型号...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="mb-table">
+                            <thead>
+                                <tr>
+                                    <th>排名</th>
+                                    <th>型号</th>
+                                    <th>平台</th>
+                                    <th>价格</th>
+                                    <th>性价比</th>
+                                    <th>推荐使用场景</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mb-table-body">
+                                <tr>
+                                    <td>1</td>
+                                    <td>ASUS ROG Crosshair X870E Hero</td>
+                                    <td>AMD AM5</td>
+                                    <td class="price-highlight">¥3899</td>
+                                    <td>8.8/10</td>
+                                    <td>顶级游戏与超频</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>MSI MPG Z890 Carbon WiFi</td>
+                                    <td>Intel LGA1851</td>
+                                    <td class="price-highlight">¥3299</td>
+                                    <td>9.2/10</td>
+                                    <td>高端游戏与创作</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Gigabyte B850 AORUS Elite AX</td>
+                                    <td>AMD AM5</td>
+                                    <td class="price-highlight">¥2199</td>
+                                    <td>9.5/10</td>
+                                    <td>中端全能性能</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>ASUS ROG STRIX B860-A Gaming WiFi</td>
+                                    <td>Intel LGA1851</td>
+                                    <td class="price-highlight">¥1899</td>
+                                    <td>9.6/10</td>
+                                    <td>高性价比游戏</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>ASRock B850M PG Lightning WiFi</td>
+                                    <td>AMD AM5</td>
+                                    <td class="price-highlight">¥1499</td>
+                                    <td>9.8/10</td>
+                                    <td>紧凑高性价比</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Gigabyte Z890 AORUS Master</td>
+                                    <td>Intel LGA1851</td>
+                                    <td class="price-highlight">¥3799</td>
+                                    <td>8.6/10</td>
+                                    <td>高端发烧友平台</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>MSI MAG B850 Tomahawk WiFi</td>
+                                    <td>AMD AM5</td>
+                                    <td class="price-highlight">¥1799</td>
+                                    <td>9.4/10</td>
+                                    <td>中端游戏平台</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>ASUS TUF Gaming B860M-PLUS WiFi</td>
+                                    <td>Intel LGA1851</td>
+                                    <td class="price-highlight">¥1599</td>
+                                    <td>9.5/10</td>
+                                    <td>紧凑耐用游戏平台</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>ASRock X870E Steel Legend</td>
+                                    <td>AMD AM5</td>
+                                    <td class="price-highlight">¥2499</td>
+                                    <td>9.0/10</td>
+                                    <td>中高端全能平台</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>MSI PRO Z890-P WiFi</td>
+                                    <td>Intel LGA1851</td>
+                                    <td class="price-highlight">¥1999</td>
+                                    <td>9.3/10</td>
+                                    <td>高性价比全能平台</td>
+                                </tr>
+                                <!-- 以下为11-20名 -->
+                                <tr data-page="2">
+                                    <td>11</td>
+                                    <td>Gigabyte X870 AORUS Pro</td>
+                                    <td>AMD AM5</td>
+                                    <td class="price-highlight">¥2799</td>
+                                    <td>8.9/10</td>
+                                    <td>中高端游戏平台</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>12</td>
+                                    <td>ASUS ProArt B860-Creator</td>
+                                    <td>Intel LGA1851</td>
+                                    <td class="price-highlight">¥2699</td>
+                                    <td>8.7/10</td>
+                                    <td>专业创作平台</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>13</td>
+                                    <td>MSI B850 Gaming Plus WiFi</td>
+                                    <td>AMD AM5</td>
+                                    <td class="price-highlight">¥1599</td>
+                                    <td>9.4/10</td>
+                                    <td>入门游戏平台</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>14</td>
+                                    <td>ASRock Z890 PG Riptide</td>
+                                    <td>Intel LGA1851</td>
+                                    <td class="price-highlight">¥2099</td>
+                                    <td>9.1/10</td>
+                                    <td>性价比超频平台</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>15</td>
+                                    <td>NZXT N7 B85</td>
+                                    <td>AMD AM5</td>
+                                    <td class="price-highlight">¥2299</td>
+                                    <td>8.8/10</td>
+                                    <td>高颜值中端平台</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>16</td>
+                                    <td>Gigabyte B860M DS3H AX</td>
+                                    <td>Intel LGA1851</td>
+                                    <td class="price-highlight">¥1199</td>
+                                    <td>9.6/10</td>
+                                    <td>入门级小型平台</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>17</td>
+                                    <td>ASUS ROG STRIX X870E-E Gaming WiFi</td>
+                                    <td>AMD AM5</td>
+                                    <td class="price-highlight">¥3599</td>
+                                    <td>8.5/10</td>
+                                    <td>高端游戏平台</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>18</td>
+                                    <td>MSI MPG B860I Edge WiFi</td>
+                                    <td>Intel LGA1851</td>
+                                    <td class="price-highlight">¥1899</td>
+                                    <td>9.2/10</td>
+                                    <td>高端ITX平台</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>19</td>
+                                    <td>ASRock B850M Phantom Gaming 4</td>
+                                    <td>AMD AM5</td>
+                                    <td class="price-highlight">¥999</td>
+                                    <td>9.7/10</td>
+                                    <td>超值入门平台</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>20</td>
+                                    <td>Gigabyte B760M DS3H</td>
+                                    <td>Intel LGA1700</td>
+                                    <td class="price-highlight">¥799</td>
+                                    <td>9.5/10</td>
+                                    <td>上一代超值平台</td>
+                                </tr>
+                                <!-- 更多条目会通过JavaScript动态加载 -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="loading" id="mb-loading" style="display: none;">
+                        <i class="fas fa-spinner"></i> 加载中...
+                    </div>
+                    
+                    <div class="pagination-container">
+                        <ul class="pagination" id="mb-pagination">
+                            <li><a href="#" class="active" data-page="1">1</a></li>
+                            <li><a href="#" data-page="2">2</a></li>
+                            <li><a href="#" data-page="3">3</a></li>
+                            <li><a href="#" data-page="4">4</a></li>
+                            <li><a href="#" data-page="5">5</a></li>
+                            <li><a href="#" data-page="6">6</a></li>
+                            <li><a href="#" data-page="7">7</a></li>
+                            <li><a href="#" data-page="8">8</a></li>
+                            <li><a href="#" data-page="9">9</a></li>
+                            <li><a href="#" data-page="10">10</a></li>
+                            <li><a href="#" data-page="next">&raquo;</a></li>
+                        </ul>
+                    </div>
+                    
+                    <p>备注：2025年主板更新侧重于支持PCIe 5.0标准、高速DDR5内存和背板连接器设计，高端主板多提供更强的VRM散热设计，以支持最新高性能处理器。完整的200款主板数据涵盖各个价位，方便不同预算需求的用户查询选择。</p>
+                </div>
+
+                <div class="tab-pane fade" id="memory-ranking" role="tabpanel">
+                    <h2>内存条排名 (2025年第二季度)</h2>
+                    
+                    <div class="filter-controls">
+                        <div class="search-box">
+                            <input type="text" id="memory-search" placeholder="搜索内存型号...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="memory-table">
+                            <thead>
+                                <tr>
+                                    <th>排名</th>
+                                    <th>型号</th>
+                                    <th>类型</th>
+                                    <th>价格</th>
+                                    <th>性价比</th>
+                                    <th>推荐使用场景</th>
+                                </tr>
+                            </thead>
+                            <tbody id="memory-table-body">
+                                <tr>
+                                    <td>1</td>
+                                    <td>G.SKILL Trident Z5 RGB NEO</td>
+                                    <td>DDR5-8000 CL36</td>
+                                    <td class="price-highlight">¥2699</td>
+                                    <td>8.5/10</td>
+                                    <td>极限超频与顶级游戏</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Corsair Dominator Titanium</td>
+                                    <td>DDR5-7200 CL34</td>
+                                    <td class="price-highlight">¥2499</td>
+                                    <td>8.7/10</td>
+                                    <td>高端游戏与内容创作</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Kingston Fury Renegade RGB</td>
+                                    <td>DDR5-6400 CL32</td>
+                                    <td class="price-highlight">¥1899</td>
+                                    <td>9.2/10</td>
+                                    <td>高性能全能型</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Crucial Pro</td>
+                                    <td>DDR5-5600 CL36</td>
+                                    <td class="price-highlight">¥1399</td>
+                                    <td>9.8/10</td>
+                                    <td>主流性价比之选</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>TeamGroup T-Force Delta RGB</td>
+                                    <td>DDR5-6000 CL30</td>
+                                    <td class="price-highlight">¥1599</td>
+                                    <td>9.5/10</td>
+                                    <td>RGB爱好者之选</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="loading" id="memory-loading" style="display: none;">
+                        <i class="fas fa-spinner"></i> 加载中...
+                    </div>
+                    
+                    <div class="pagination-container">
+                        <ul class="pagination" id="memory-pagination">
+                            <li><a href="#" class="active" data-page="1">1</a></li>
+                            <li><a href="#" data-page="2">2</a></li>
+                            <li><a href="#" data-page="3">3</a></li>
+                            <li><a href="#" data-page="4">4</a></li>
+                            <li><a href="#" data-page="5">5</a></li>
+                            <li><a href="#" data-page="6">6</a></li>
+                            <li><a href="#" data-page="7">7</a></li>
+                            <li><a href="#" data-page="8">8</a></li>
+                            <li><a href="#" data-page="9">9</a></li>
+                            <li><a href="#" data-page="10">10</a></li>
+                            <li><a href="#" data-page="next">&raquo;</a></li>
+                        </ul>
+                    </div>
+                    
+                    <p>备注：2025年内存市场已全面转向DDR5，主流平台推荐6000MHz以上频率。高端超频内存可达8000MHz以上，但价格溢价明显。选择时应注意与主板QVL兼容性列表匹配。采用更高密度芯片后，16GB单条已成为标配，32GB套装是游戏玩家的最佳选择，而创意工作者则推荐64GB配置。</p>
+                </div>
+
+                <div class="tab-pane fade" id="cpu-ranking" role="tabpanel">
+                    <h2>CPU排名 (2025年第二季度)</h2>
+                    
+                    <div class="filter-controls">
+                        <div class="search-box">
+                            <input type="text" id="cpu-search" placeholder="搜索处理器型号...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="cpu-table">
+                            <thead>
+                                <tr>
+                                    <th>排名</th>
+                                    <th>处理器型号</th>
+                                    <th>核心/线程</th>
+                                    <th>性能得分</th>
+                                    <th>价格</th>
+                                    <th>性价比</th>
+                                    <th>推荐使用场景</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cpu-table-body">
+                                <tr>
+                                    <td>1</td>
+                                    <td>AMD Ryzen 9 9950X3D</td>
+                                    <td>16核/32线程</td>
+                                    <td>9.8/10</td>
+                                    <td class="price-highlight">¥4899</td>
+                                    <td>7.5/10</td>
+                                    <td>高端游戏与专业工作站</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>AMD Ryzen 7 9800X3D</td>
+                                    <td>8核/16线程</td>
+                                    <td>9.7/10</td>
+                                    <td class="price-highlight">¥3699</td>
+                                    <td>8.5/10</td>
+                                    <td>高性能游戏与流媒体</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Intel Core Ultra 9 285K</td>
+                                    <td>24核/24线程</td>
+                                    <td>9.5/10</td>
+                                    <td class="price-highlight">¥5299</td>
+                                    <td>7.0/10</td>
+                                    <td>生产力与专业应用</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>AMD Ryzen 9 9950X</td>
+                                    <td>16核/32线程</td>
+                                    <td>9.4/10</td>
+                                    <td class="price-highlight">¥4499</td>
+                                    <td>8.0/10</td>
+                                    <td>内容创作与多任务处理</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Intel Core i7-14700K</td>
+                                    <td>20核/28线程</td>
+                                    <td>9.2/10</td>
+                                    <td class="price-highlight">¥3299</td>
+                                    <td>8.3/10</td>
+                                    <td>游戏与流媒体</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>AMD Ryzen 7 9700X</td>
+                                    <td>8核/16线程</td>
+                                    <td>9.1/10</td>
+                                    <td class="price-highlight">¥2899</td>
+                                    <td>8.7/10</td>
+                                    <td>中高端游戏与日常使用</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Intel Core Ultra 7 265K</td>
+                                    <td>16核/16线程</td>
+                                    <td>9.0/10</td>
+                                    <td class="price-highlight">¥3099</td>
+                                    <td>8.4/10</td>
+                                    <td>游戏与轻度创作</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Intel Core i5-14600K</td>
+                                    <td>14核/20线程</td>
+                                    <td>8.9/10</td>
+                                    <td class="price-highlight">¥2199</td>
+                                    <td>9.1/10</td>
+                                    <td>性价比游戏芯片</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>AMD Ryzen 5 9600X</td>
+                                    <td>6核/12线程</td>
+                                    <td>8.8/10</td>
+                                    <td class="price-highlight">¥1899</td>
+                                    <td>9.3/10</td>
+                                    <td>主流游戏与办公</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Intel Core Ultra 5 245K</td>
+                                    <td>12核/12线程</td>
+                                    <td>8.7/10</td>
+                                    <td class="price-highlight">¥1999</td>
+                                    <td>9.0/10</td>
+                                    <td>主流游戏与多任务处理</td>
+                                </tr>
+                                <!-- 以下为11-20名 -->
+                                <tr data-page="2">
+                                    <td>11</td>
+                                    <td>AMD Ryzen 5 9600</td>
+                                    <td>6核/12线程</td>
+                                    <td>8.6/10</td>
+                                    <td class="price-highlight">¥1699</td>
+                                    <td>9.4/10</td>
+                                    <td>性价比主流平台</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>12</td>
+                                    <td>Intel Core i5-14500</td>
+                                    <td>14核/20线程</td>
+                                    <td>8.5/10</td>
+                                    <td class="price-highlight">¥1899</td>
+                                    <td>9.2/10</td>
+                                    <td>入门游戏平台</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>13</td>
+                                    <td>AMD Ryzen 7 7800X3D</td>
+                                    <td>8核/16线程</td>
+                                    <td>8.4/10</td>
+                                    <td class="price-highlight">¥2399</td>
+                                    <td>8.8/10</td>
+                                    <td>上一代高性能游戏</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>14</td>
+                                    <td>Intel Core Ultra 5 235</td>
+                                    <td>12核/12线程</td>
+                                    <td>8.3/10</td>
+                                    <td class="price-highlight">¥1699</td>
+                                    <td>9.1/10</td>
+                                    <td>预算型全能处理器</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>15</td>
+                                    <td>AMD Ryzen 5 7600X</td>
+                                    <td>6核/12线程</td>
+                                    <td>8.2/10</td>
+                                    <td class="price-highlight">¥1499</td>
+                                    <td>9.0/10</td>
+                                    <td>上一代高性价比</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>16</td>
+                                    <td>Intel Core i7-13700K</td>
+                                    <td>16核/24线程</td>
+                                    <td>8.1/10</td>
+                                    <td class="price-highlight">¥2599</td>
+                                    <td>8.7/10</td>
+                                    <td>上一代高端游戏</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>17</td>
+                                    <td>AMD Ryzen 9 7950X</td>
+                                    <td>16核/32线程</td>
+                                    <td>8.0/10</td>
+                                    <td class="price-highlight">¥3799</td>
+                                    <td>8.3/10</td>
+                                    <td>上一代高端创作</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>18</td>
+                                    <td>Intel Core Ultra 3 215</td>
+                                    <td>8核/8线程</td>
+                                    <td>7.9/10</td>
+                                    <td class="price-highlight">¥1299</td>
+                                    <td>9.4/10</td>
+                                    <td>入门级日常办公</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>19</td>
+                                    <td>AMD Ryzen 7 7700X</td>
+                                    <td>8核/16线程</td>
+                                    <td>7.8/10</td>
+                                    <td class="price-highlight">¥2099</td>
+                                    <td>8.9/10</td>
+                                    <td>上一代中高端全能</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>20</td>
+                                    <td>Intel Core i5-13600K</td>
+                                    <td>14核/20线程</td>
+                                    <td>7.7/10</td>
+                                    <td class="price-highlight">¥1899</td>
+                                    <td>9.0/10</td>
+                                    <td>上一代性价比之选</td>
+                                </tr>
+                                <!-- 更多条目会通过JavaScript动态加载 -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="loading" id="cpu-loading" style="display: none;">
+                        <i class="fas fa-spinner"></i> 加载中...
+                    </div>
+                    
+                    <div class="pagination-container">
+                        <ul class="pagination" id="cpu-pagination">
+                            <li><a href="#" class="active" data-page="1">1</a></li>
+                            <li><a href="#" data-page="2">2</a></li>
+                            <li><a href="#" data-page="3">3</a></li>
+                            <li><a href="#" data-page="4">4</a></li>
+                            <li><a href="#" data-page="5">5</a></li>
+                            <li><a href="#" data-page="6">6</a></li>
+                            <li><a href="#" data-page="7">7</a></li>
+                            <li><a href="#" data-page="8">8</a></li>
+                            <li><a href="#" data-page="9">9</a></li>
+                            <li><a href="#" data-page="10">10</a></li>
+                            <li><a href="#" data-page="next">&raquo;</a></li>
+                        </ul>
+                    </div>
+                    
+                    <p>备注：CPU排名每季度更新一次，基于性能测试、价格和可用性变化。性能得分基于综合基准测试，包括游戏、内容创作和日常使用场景。完整的200款CPU数据包含所有主流和上一代产品，供消费者全面参考。</p>
+                </div>
+
+                <div class="tab-pane fade" id="gpu-ranking" role="tabpanel">
+                    <h2>显卡排名 (2025年第二季度)</h2>
+                    
+                    <div class="filter-controls">
+                        <div class="search-box">
+                            <input type="text" id="gpu-search" placeholder="搜索显卡型号...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="gpu-table">
+                            <thead>
+                                <tr>
+                                    <th>排名</th>
+                                    <th>型号</th>
+                                    <th>性能得分</th>
+                                    <th>价格</th>
+                                    <th>性价比</th>
+                                    <th>推荐分辨率</th>
+                                </tr>
+                            </thead>
+                            <tbody id="gpu-table-body">
+                                <tr>
+                                    <td>1</td>
+                                    <td>NVIDIA GeForce RTX 5090</td>
+                                    <td>10.0/10</td>
+                                    <td class="price-highlight">¥15999</td>
+                                    <td>7.0/10</td>
+                                    <td>4K/8K</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>NVIDIA GeForce RTX 4090</td>
+                                    <td>9.8/10</td>
+                                    <td class="price-highlight">¥12999</td>
+                                    <td>7.2/10</td>
+                                    <td>4K/8K</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>NVIDIA GeForce RTX 5080</td>
+                                    <td>9.5/10</td>
+                                    <td class="price-highlight">¥9999</td>
+                                    <td>7.5/10</td>
+                                    <td>4K</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>AMD Radeon RX 9070 XT</td>
+                                    <td>9.2/10</td>
+                                    <td class="price-highlight">¥7499</td>
+                                    <td>8.0/10</td>
+                                    <td>2K/4K</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>NVIDIA GeForce RTX 5070</td>
+                                    <td>9.0/10</td>
+                                    <td class="price-highlight">¥6799</td>
+                                    <td>8.5/10</td>
+                                    <td>2K/4K</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>AMD Radeon RX 9050</td>
+                                    <td>8.9/10</td>
+                                    <td class="price-highlight">¥5799</td>
+                                    <td>8.7/10</td>
+                                    <td>2K/4K</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>NVIDIA GeForce RTX 5060 Ti</td>
+                                    <td>8.7/10</td>
+                                    <td class="price-highlight">¥4899</td>
+                                    <td>8.8/10</td>
+                                    <td>2K</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>AMD Radeon RX 8800 XT</td>
+                                    <td>8.6/10</td>
+                                    <td class="price-highlight">¥4599</td>
+                                    <td>8.9/10</td>
+                                    <td>2K</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>NVIDIA GeForce RTX 5060</td>
+                                    <td>8.5/10</td>
+                                    <td class="price-highlight">¥3799</td>
+                                    <td>9.0/10</td>
+                                    <td>2K</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Intel Arc A850 Ultra</td>
+                                    <td>8.3/10</td>
+                                    <td class="price-highlight">¥3499</td>
+                                    <td>9.1/10</td>
+                                    <td>1080p/2K</td>
+                                </tr>
+                                <!-- 以下为11-20名 -->
+                                <tr data-page="2">
+                                    <td>11</td>
+                                    <td>AMD Radeon RX 8700 XT</td>
+                                    <td>8.2/10</td>
+                                    <td class="price-highlight">¥3299</td>
+                                    <td>9.2/10</td>
+                                    <td>1080p/2K</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>12</td>
+                                    <td>NVIDIA GeForce RTX 4070 Super</td>
+                                    <td>8.1/10</td>
+                                    <td class="price-highlight">¥3899</td>
+                                    <td>8.8/10</td>
+                                    <td>1080p/2K</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>13</td>
+                                    <td>Intel Arc A750 Ultra</td>
+                                    <td>8.0/10</td>
+                                    <td class="price-highlight">¥2899</td>
+                                    <td>9.3/10</td>
+                                    <td>1080p/2K</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>14</td>
+                                    <td>AMD Radeon RX 8600 XT</td>
+                                    <td>7.9/10</td>
+                                    <td class="price-highlight">¥2599</td>
+                                    <td>9.4/10</td>
+                                    <td>1080p/2K</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>15</td>
+                                    <td>NVIDIA GeForce RTX 4060 Ti</td>
+                                    <td>7.8/10</td>
+                                    <td class="price-highlight">¥2899</td>
+                                    <td>9.0/10</td>
+                                    <td>1080p/2K</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>16</td>
+                                    <td>NVIDIA GeForce RTX 4060</td>
+                                    <td>7.7/10</td>
+                                    <td class="price-highlight">¥2299</td>
+                                    <td>9.2/10</td>
+                                    <td>1080p</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>17</td>
+                                    <td>AMD Radeon RX 8600</td>
+                                    <td>7.6/10</td>
+                                    <td class="price-highlight">¥1999</td>
+                                    <td>9.5/10</td>
+                                    <td>1080p</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>18</td>
+                                    <td>Intel Arc A580</td>
+                                    <td>7.5/10</td>
+                                    <td class="price-highlight">¥1799</td>
+                                    <td>9.6/10</td>
+                                    <td>1080p</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>19</td>
+                                    <td>NVIDIA GeForce RTX 4050</td>
+                                    <td>7.4/10</td>
+                                    <td class="price-highlight">¥1699</td>
+                                    <td>9.3/10</td>
+                                    <td>1080p</td>
+                                </tr>
+                                <tr data-page="2">
+                                    <td>20</td>
+                                    <td>AMD Radeon RX 8500 XT</td>
+                                    <td>7.3/10</td>
+                                    <td class="price-highlight">¥1499</td>
+                                    <td>9.7/10</td>
+                                    <td>1080p</td>
+                                </tr>
+                                <!-- 更多条目会通过JavaScript动态加载 -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="loading" id="gpu-loading" style="display: none;">
+                        <i class="fas fa-spinner"></i> 加载中...
+                    </div>
+                    
+                    <div class="pagination-container">
+                        <ul class="pagination" id="gpu-pagination">
+                            <li><a href="#" class="active" data-page="1">1</a></li>
+                            <li><a href="#" data-page="2">2</a></li>
+                            <li><a href="#" data-page="3">3</a></li>
+                            <li><a href="#" data-page="4">4</a></li>
+                            <li><a href="#" data-page="5">5</a></li>
+                            <li><a href="#" data-page="6">6</a></li>
+                            <li><a href="#" data-page="7">7</a></li>
+                            <li><a href="#" data-page="8">8</a></li>
+                            <li><a href="#" data-page="9">9</a></li>
+                            <li><a href="#" data-page="10">10</a></li>
+                            <li><a href="#" data-page="next">&raquo;</a></li>
+                        </ul>
+                    </div>
+                    
+                    <p>备注：最新一代GPU价格受市场需求和供应链影响可能波动较大，请根据预算和需求慎重选择。适合2K及以上分辨率游戏的显卡往往拥有更好的长期使用价值。完整的200款显卡数据包含所有新旧产品，帮助消费者全面了解市场。</p>
+                </div>
+
+                <div class="tab-pane fade" id="storage-ranking" role="tabpanel">
+                    <h2>硬盘排名 (2025年第二季度)</h2>
+                    
+                    <div class="filter-controls">
+                        <div class="search-box">
+                            <input type="text" id="storage-search" placeholder="搜索硬盘型号...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="storage-table">
+                            <thead>
+                                <tr>
+                                    <th>排名</th>
+                                    <th>型号</th>
+                                    <th>类型</th>
+                                    <th>价格</th>
+                                    <th>性价比</th>
+                                    <th>推荐使用场景</th>
+                                </tr>
+                            </thead>
+                            <tbody id="storage-table-body">
+                                <tr>
+                                    <td>1</td>
+                                    <td>Samsung 990 Pro Gen5</td>
+                                    <td>PCIe 5.0 NVMe SSD 4TB</td>
+                                    <td class="price-highlight">¥3499</td>
+                                    <td>8.7/10</td>
+                                    <td>顶级游戏与专业工作站</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>WD Black SN890</td>
+                                    <td>PCIe 5.0 NVMe SSD 2TB</td>
+                                    <td class="price-highlight">¥2899</td>
+                                    <td>9.0/10</td>
+                                    <td>高端游戏与内容创作</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Crucial T700</td>
+                                    <td>PCIe 5.0 NVMe SSD 4TB</td>
+                                    <td class="price-highlight">¥3199</td>
+                                    <td>9.2/10</td>
+                                    <td>高性能全能型</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Samsung 990 Pro</td>
+                                    <td>PCIe 4.0 NVMe SSD 2TB</td>
+                                    <td class="price-highlight">¥1699</td>
+                                    <td>9.5/10</td>
+                                    <td>主流高性能</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Kingston KC3000</td>
+                                    <td>PCIe 4.0 NVMe SSD 2TB</td>
+                                    <td class="price-highlight">¥1599</td>
+                                    <td>9.7/10</td>
+                                    <td>性价比之选</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="loading" id="storage-loading" style="display: none;">
+                        <i class="fas fa-spinner"></i> 加载中...
+                    </div>
+                    
+                    <div class="pagination-container">
+                        <ul class="pagination" id="storage-pagination">
+                            <li><a href="#" class="active" data-page="1">1</a></li>
+                            <li><a href="#" data-page="2">2</a></li>
+                            <li><a href="#" data-page="3">3</a></li>
+                            <li><a href="#" data-page="4">4</a></li>
+                            <li><a href="#" data-page="5">5</a></li>
+                            <li><a href="#" data-page="6">6</a></li>
+                            <li><a href="#" data-page="7">7</a></li>
+                            <li><a href="#" data-page="8">8</a></li>
+                            <li><a href="#" data-page="9">9</a></li>
+                            <li><a href="#" data-page="10">10</a></li>
+                            <li><a href="#" data-page="next">&raquo;</a></li>
+                        </ul>
+                    </div>
+                    
+                    <p>备注：2025年存储市场PCIe 5.0 SSD已成为高端平台标配，读写速度可达14GB/s以上，但需要注意散热问题。PCIe 4.0 SSD仍是主流性价比之选，提供7GB/s左右的读写速度，足以满足大多数用户需求。对于大容量存储需求，高容量HDD仍然是成本效益最高的解决方案，特别是在多媒体存储和数据备份场景下。</p>
+                </div>
+
+                <div class="tab-pane fade" id="optical-ranking" role="tabpanel">
+                    <h2>光驱排名 (2025年第二季度)</h2>
+                    <div class="filter-container">
+                        <div class="search-box">
+                            <input type="text" id="optical-search" placeholder="搜索光驱型号..." />
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>排名</th>
+                                    <th>型号</th>
+                                    <th>类型</th>
+                                    <th>价格</th>
+                                    <th>性能评分</th>
+                                    <th>推荐使用场景</th>
+                                </tr>
+                            </thead>
+                            <tbody id="optical-table-body">
+                                <tr>
+                                    <td>1</td>
+                                    <td>Pioneer BDR-S13UHT</td>
+                                    <td>内置蓝光刻录机</td>
+                                    <td class="price-highlight">¥799</td>
+                                    <td>8.9/10</td>
+                                    <td>专业蓝光刻录与存档</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Pioneer BDR-XD08B</td>
+                                    <td>外置蓝光刻录机</td>
+                                    <td class="price-highlight">¥899</td>
+                                    <td>9.0/10</td>
+                                    <td>便携蓝光解决方案</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>ASUS BW-16D1HT Pro</td>
+                                    <td>内置蓝光刻录机</td>
+                                    <td class="price-highlight">¥699</td>
+                                    <td>9.1/10</td>
+                                    <td>高性能多用途</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>LG GP65NB70</td>
+                                    <td>外置DVD刻录机</td>
+                                    <td class="price-highlight">¥199</td>
+                                    <td>9.6/10</td>
+                                    <td>便携DVD读写</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>ASUS DRW-24D5MT Plus</td>
+                                    <td>内置DVD刻录机</td>
+                                    <td class="price-highlight">¥129</td>
+                                    <td>9.7/10</td>
+                                    <td>经济型DVD解决方案</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="loading" id="optical-loading" style="display: none;">
+                        <i class="fas fa-spinner"></i> 加载中...
+                    </div>
+                    
+                    <div class="pagination-container">
+                        <ul class="pagination" id="optical-pagination">
+                            <li><a href="#" class="active" data-page="1">1</a></li>
+                            <li><a href="#" data-page="2">2</a></li>
+                            <li><a href="#" data-page="3">3</a></li>
+                            <li><a href="#" data-page="4">4</a></li>
+                            <li><a href="#" data-page="5">5</a></li>
+                            <li><a href="#" data-page="next">&raquo;</a></li>
+                        </ul>
+                    </div>
+                    
+                    <p>备注：虽然光驱在现代电脑配置中使用频率降低，但对于特定需求（如音乐制作、数据存档、老旧媒体读取等）仍有不可替代的作用。外置光驱因其便携性和即插即用特性，成为更受欢迎的选择。2025年的光驱支持更高的蓝光读写速度和更好的兼容性。</p>
+                </div>
+
+                <div class="tab-pane fade" id="cooling-ranking" role="tabpanel">
+                    <h2>散热风扇排名 (2025年第二季度)</h2>
+                    <div class="filter-container">
+                        <div class="search-box">
+                            <input type="text" id="cooling-search" placeholder="搜索散热器型号..." />
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>排名</th>
+                                    <th>型号</th>
+                                    <th>类型</th>
+                                    <th>价格</th>
+                                    <th>性能评分</th>
+                                    <th>推荐使用场景</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cooling-table-body">
+                                <tr>
+                                    <td>1</td>
+                                    <td>Thermalright Phantom Spirit 120 EVO</td>
+                                    <td>双塔风冷</td>
+                                    <td class="price-highlight">¥399</td>
+                                    <td>9.8/10</td>
+                                    <td>高性价比高端风冷</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Arctic Liquid Freezer III Pro 360</td>
+                                    <td>360mm一体式水冷</td>
+                                    <td class="price-highlight">¥999</td>
+                                    <td>9.5/10</td>
+                                    <td>高端水冷散热</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Noctua NH-D15 G2</td>
+                                    <td>双塔风冷</td>
+                                    <td class="price-highlight">¥799</td>
+                                    <td>9.0/10</td>
+                                    <td>静音高端风冷</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Cooler Master Hyper 612 Apex</td>
+                                    <td>双塔风冷</td>
+                                    <td class="price-highlight">¥499</td>
+                                    <td>9.4/10</td>
+                                    <td>中高端静音风冷</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Thermalright Peerless Assassin 120 SE</td>
+                                    <td>双塔风冷</td>
+                                    <td class="price-highlight">¥299</td>
+                                    <td>9.9/10</td>
+                                    <td>极致性价比风冷</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="loading" id="cooling-loading" style="display: none;">
+                        <i class="fas fa-spinner"></i> 加载中...
+                    </div>
+                    
+                    <div class="pagination-container">
+                        <ul class="pagination" id="cooling-pagination">
+                            <li><a href="#" class="active" data-page="1">1</a></li>
+                            <li><a href="#" data-page="2">2</a></li>
+                            <li><a href="#" data-page="3">3</a></li>
+                            <li><a href="#" data-page="4">4</a></li>
+                            <li><a href="#" data-page="5">5</a></li>
+                            <li><a href="#" data-page="6">6</a></li>
+                            <li><a href="#" data-page="7">7</a></li>
+                            <li><a href="#" data-page="8">8</a></li>
+                            <li><a href="#" data-page="9">9</a></li>
+                            <li><a href="#" data-page="10">10</a></li>
+                            <li><a href="#" data-page="next">&raquo;</a></li>
+                        </ul>
+                    </div>
+                    
+                    <p>备注：现代散热器能够支持各种处理器TDP，从高端双塔风冷到一体式水冷，选择时应根据CPU功耗、机箱空间和预算进行综合考量。风冷散热器通常更加稳定可靠，而高端水冷在极限散热场景下表现更佳。2025年新款散热器采用更先进的导热材料和风扇设计，使得散热表现相比前几代产品有显著提升。</p>
+                </div>
+
+                <div class="tab-pane fade" id="case-ranking" role="tabpanel">
+                    <h2>机箱排名 (2025年第二季度)</h2>
+                    <div class="filter-container">
+                        <div class="search-box">
+                            <input type="text" id="case-search" placeholder="搜索机箱型号..." />
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>排名</th>
+                                    <th>型号</th>
+                                    <th>类型</th>
+                                    <th>价格</th>
+                                    <th>性能评分</th>
+                                    <th>推荐使用场景</th>
+                                </tr>
+                            </thead>
+                            <tbody id="case-table-body">
+                                <tr>
+                                    <td>1</td>
+                                    <td>Havn HS 420</td>
+                                    <td>中塔ATX</td>
+                                    <td class="price-highlight">¥899</td>
+                                    <td>9.7/10</td>
+                                    <td>豪华展示型构建</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Lian Li O11 Vision Compact</td>
+                                    <td>中塔ATX</td>
+                                    <td class="price-highlight">¥799</td>
+                                    <td>9.6/10</td>
+                                    <td>高性价比展示型机箱</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>NZXT H7 Flow</td>
+                                    <td>全塔ATX</td>
+                                    <td class="price-highlight">¥749</td>
+                                    <td>9.8/10</td>
+                                    <td>高散热性能</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Fractal Design Meshify 3</td>
+                                    <td>中塔ATX</td>
+                                    <td class="price-highlight">¥699</td>
+                                    <td>9.5/10</td>
+                                    <td>优质用户体验</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Fractal Design Terra</td>
+                                    <td>ITX小型机箱</td>
+                                    <td class="price-highlight">¥649</td>
+                                    <td>9.4/10</td>
+                                    <td>紧凑高性能构建</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="loading" id="case-loading" style="display: none;">
+                        <i class="fas fa-spinner"></i> 加载中...
+                    </div>
+                    
+                    <div class="pagination-container">
+                        <ul class="pagination" id="case-pagination">
+                            <li><a href="#" class="active" data-page="1">1</a></li>
+                            <li><a href="#" data-page="2">2</a></li>
+                            <li><a href="#" data-page="3">3</a></li>
+                            <li><a href="#" data-page="4">4</a></li>
+                            <li><a href="#" data-page="5">5</a></li>
+                            <li><a href="#" data-page="6">6</a></li>
+                            <li><a href="#" data-page="7">7</a></li>
+                            <li><a href="#" data-page="8">8</a></li>
+                            <li><a href="#" data-page="9">9</a></li>
+                            <li><a href="#" data-page="10">10</a></li>
+                            <li><a href="#" data-page="next">&raquo;</a></li>
+                        </ul>
+                    </div>
+                    
+                    <p>备注：2025年机箱设计趋势侧重于优化气流、支持背板连接主板和更好的线缆管理。新一代机箱多数提供开放式设计，更好的散热性能，以及易于安装组件的工具设计。选择机箱时应注意与您计划使用的组件尺寸兼容性，特别是显卡长度和CPU散热器高度。</p>
+                </div>
+
+                <div class="tab-pane fade" id="power-ranking" role="tabpanel">
+                    <h2>电源排名 (2025年第二季度)</h2>
+                    <div class="filter-container">
+                        <div class="search-box">
+                            <input type="text" id="power-search" placeholder="搜索电源型号..." />
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>排名</th>
+                                    <th>型号</th>
+                                    <th>规格</th>
+                                    <th>价格</th>
+                                    <th>性能评分</th>
+                                    <th>推荐使用场景</th>
+                                </tr>
+                            </thead>
+                            <tbody id="power-table-body">
+                                <tr>
+                                    <td>1</td>
+                                    <td>海韵 PRIME TX-1000</td>
+                                    <td>1000W 钛金全模组</td>
+                                    <td class="price-highlight">¥1899</td>
+                                    <td>9.3/10</td>
+                                    <td>顶级高性能系统</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>振华 LEADEX V 850W</td>
+                                    <td>850W 白金全模组</td>
+                                    <td class="price-highlight">¥1499</td>
+                                    <td>9.5/10</td>
+                                    <td>高端游戏与创作系统</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>酷冷至尊 V SFX Gold 1100W</td>
+                                    <td>1100W 金牌SFX全模组</td>
+                                    <td class="price-highlight">¥1699</td>
+                                    <td>9.2/10</td>
+                                    <td>高性能紧凑型系统</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>安钛克 HCG850 Gold</td>
+                                    <td>850W 金牌全模组</td>
+                                    <td class="price-highlight">¥999</td>
+                                    <td>9.7/10</td>
+                                    <td>中高端游戏电脑</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>鑫谷 GP750G Pro</td>
+                                    <td>750W 金牌全模组</td>
+                                    <td class="price-highlight">¥799</td>
+                                    <td>9.8/10</td>
+                                    <td>主流游戏电脑</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="loading" id="power-loading" style="display: none;">
+                        <i class="fas fa-spinner"></i> 加载中...
+                    </div>
+                    
+                    <div class="pagination-container">
+                        <ul class="pagination" id="power-pagination">
+                            <li><a href="#" class="active" data-page="1">1</a></li>
+                            <li><a href="#" data-page="2">2</a></li>
+                            <li><a href="#" data-page="3">3</a></li>
+                            <li><a href="#" data-page="4">4</a></li>
+                            <li><a href="#" data-page="5">5</a></li>
+                            <li><a href="#" data-page="6">6</a></li>
+                            <li><a href="#" data-page="7">7</a></li>
+                            <li><a href="#" data-page="8">8</a></li>
+                            <li><a href="#" data-page="9">9</a></li>
+                            <li><a href="#" data-page="10">10</a></li>
+                            <li><a href="#" data-page="next">&raquo;</a></li>
+                        </ul>
+                    </div>
+                    
+                    <p>备注：2025年电源标准已全面升级至ATX 3.0，支持PCIe 5.0显卡的12V-2x6接口，为新一代高功耗显卡提供稳定电力。选择电源时应预留30%功率余量，确保系统稳定性和未来升级空间。</p>
+                </div>
+
+                <div class="tab-pane fade" id="monitor-ranking" role="tabpanel">
+                    <h2>显示器排名 (2025年第二季度)</h2>
+                    <div class="filter-container">
+                        <div class="search-box">
+                            <input type="text" id="monitor-search" placeholder="搜索显示器型号..." />
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>排名</th>
+                                    <th>型号</th>
+                                    <th>规格</th>
+                                    <th>价格</th>
+                                    <th>性能评分</th>
+                                    <th>推荐使用场景</th>
+                                </tr>
+                            </thead>
+                            <tbody id="monitor-table-body">
+                                <tr>
+                                    <td>1</td>
+                                    <td>LG UltraGear OLED 32GS95UE</td>
+                                    <td>32" 4K 240Hz OLED</td>
+                                    <td class="price-highlight">¥7999</td>
+                                    <td>9.0/10</td>
+                                    <td>顶级游戏与内容创作</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Samsung Odyssey OLED G8</td>
+                                    <td>34" 3440x1440 175Hz OLED曲面</td>
+                                    <td class="price-highlight">¥6499</td>
+                                    <td>9.2/10</td>
+                                    <td>沉浸式游戏体验</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>ASUS ProArt PA32UCG-K</td>
+                                    <td>32" 4K 120Hz Mini-LED</td>
+                                    <td class="price-highlight">¥9999</td>
+                                    <td>8.8/10</td>
+                                    <td>专业色彩工作</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Dell S2724DGF</td>
+                                    <td>27" 2K 180Hz IPS</td>
+                                    <td class="price-highlight">¥2499</td>
+                                    <td>9.6/10</td>
+                                    <td>主流游戏与日常使用</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>AOC 24G3Z</td>
+                                    <td>24" 1080p 240Hz IPS</td>
+                                    <td class="price-highlight">¥1499</td>
+                                    <td>9.8/10</td>
+                                    <td>电竞与高帧率游戏</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="loading" id="monitor-loading" style="display: none;">
+                        <i class="fas fa-spinner"></i> 加载中...
+                    </div>
+                    
+                    <div class="pagination-container">
+                        <ul class="pagination" id="monitor-pagination">
+                            <li><a href="#" class="active" data-page="1">1</a></li>
+                            <li><a href="#" data-page="2">2</a></li>
+                            <li><a href="#" data-page="3">3</a></li>
+                            <li><a href="#" data-page="4">4</a></li>
+                            <li><a href="#" data-page="5">5</a></li>
+                            <li><a href="#" data-page="6">6</a></li>
+                            <li><a href="#" data-page="7">7</a></li>
+                            <li><a href="#" data-page="8">8</a></li>
+                            <li><a href="#" data-page="9">9</a></li>
+                            <li><a href="#" data-page="10">10</a></li>
+                            <li><a href="#" data-page="next">&raquo;</a></li>
+                        </ul>
+                    </div>
+                    
+                    <p>备注：2025年显示器市场OLED技术已成熟，高刷新率和快速响应时间使其成为高端游戏显示器的首选。Mini-LED技术为专业创作提供了更好的HDR表现和色彩准确度。选择显示器时应根据用途考虑分辨率、刷新率和面板类型。</p>
+                </div>
+
+                <div class="tab-pane fade" id="peripheral-ranking" role="tabpanel">
+                    <h2>鼠标和键盘排名 (2025年第二季度)</h2>
+                    <div class="filter-container">
+                        <div class="search-box">
+                            <input type="text" id="peripheral-search" placeholder="搜索外设型号..." />
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>排名</th>
+                                    <th>产品类型</th>
+                                    <th>型号</th>
+                                    <th>价格</th>
+                                    <th>性能评分</th>
+                                    <th>推荐使用场景</th>
+                                </tr>
+                            </thead>
+                            <tbody id="peripheral-table-body">
+                                <tr>
+                                    <td>1</td>
+                                    <td>游戏鼠标</td>
+                                    <td>罗技 G Pro X Superlight 2</td>
+                                    <td class="price-highlight">¥999</td>
+                                    <td>9.3/10</td>
+                                    <td>专业电竞与高精度游戏</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>游戏键盘</td>
+                                    <td>SteelSeries Apex Pro 2 Mini</td>
+                                    <td class="price-highlight">¥1299</td>
+                                    <td>9.4/10</td>
+                                    <td>可调触发点机械键盘</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>办公鼠标</td>
+                                    <td>罗技 MX Master 4</td>
+                                    <td class="price-highlight">¥849</td>
+                                    <td>9.5/10</td>
+                                    <td>高效专业办公</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>办公键盘</td>
+                                    <td>罗技 MX Keys S</td>
+                                    <td class="price-highlight">¥799</td>
+                                    <td>9.6/10</td>
+                                    <td>舒适高效办公</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>入门套装</td>
+                                    <td>雷蛇 Viper Mini + Huntsman Mini</td>
+                                    <td class="price-highlight">¥599</td>
+                                    <td>9.7/10</td>
+                                    <td>入门游戏与日常使用</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="loading" id="peripheral-loading" style="display: none;">
+                        <i class="fas fa-spinner"></i> 加载中...
+                    </div>
+                    
+                    <div class="pagination-container">
+                        <ul class="pagination" id="peripheral-pagination">
+                            <li><a href="#" class="active" data-page="1">1</a></li>
+                            <li><a href="#" data-page="2">2</a></li>
+                            <li><a href="#" data-page="3">3</a></li>
+                            <li><a href="#" data-page="4">4</a></li>
+                            <li><a href="#" data-page="5">5</a></li>
+                            <li><a href="#" data-page="6">6</a></li>
+                            <li><a href="#" data-page="7">7</a></li>
+                            <li><a href="#" data-page="8">8</a></li>
+                            <li><a href="#" data-page="9">9</a></li>
+                            <li><a href="#" data-page="10">10</a></li>
+                            <li><a href="#" data-page="next">&raquo;</a></li>
+                        </ul>
+                    </div>
+                    
+                    <p>备注：2025年外设技术更注重无线性能和电池续航，高端游戏鼠标已实现超低延迟和轻量化设计。键盘市场流行可热插拔轴体和可调触发点技术，提供更个性化的使用体验。</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="ranking-notes">
+            <div class="note">
+                <i class="fas fa-info-circle"></i>
+                <p>排名每季度更新一次，基于价格变动和新品上市情况调整。</p>
+            </div>
+            <div class="note">
+                <i class="fas fa-lightbulb"></i>
+                <p>选择硬件时应综合考虑个人需求、兼容性和预算，而不仅仅参考排名。</p>
+            </div>
+            <div class="note" id="data-loading-status">
+                <i class="fas fa-database"></i>
+                <p>数据加载状态: <span id="data-status">正在初始化...</span></p>
+            </div>
+        </div>
+    </div>
+
+    <section class="cta">
+        <div class="container">
+            <h2>了解了排名，开始挑选配件？</h2>
+            <p>查看我们的详细配件介绍和装机教程，帮助您打造理想的电脑。</p>
+            <div class="cta-buttons">
+                <a href="components.html" class="btn">查看配件详情 <i class="fas fa-microchip"></i></a>
+                <a href="assembly.html" class="btn btn-alt">装机教程 <i class="fas fa-tools"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>装机-爽</h2>
+                    <p>小白装机指南，让装机变得简单</p>
+                </div>
+                <div class="footer-links">
+                    <h3>快速导航</h3>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="components.html">电脑配件</a></li>
+                        <li><a href="assembly.html">装机教程</a></li>
+                        <li><a href="recommendations.html">配置推荐</a></li>
+                        <li><a href="troubleshooting.html">常见问题</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 装机-爽 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

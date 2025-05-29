@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电脑配件 | 装机-爽</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .component-section {
+            padding: 2rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .component-section:last-child {
+            border-bottom: none;
+        }
+        
+        .component-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .component-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-right: 1rem;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .component-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .component-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .component-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .component-detail h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .component-detail ul {
+            list-style: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .component-detail ul li {
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        
+        .component-tips {
+            background-color: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .component-warning {
+            background-color: rgba(243, 156, 18, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1587831990711-23ca6441447b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .page-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .page-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .component-nav {
+            background-color: white;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 70px;
+            z-index: 100;
+            width: 100%;
+        }
+        
+        .component-nav ul {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+        
+        .component-nav ul li a {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            color: var(--text);
+            font-weight: 500;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 0.95rem;
+        }
+        
+        .component-nav ul li a:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--primary);
+        }
+        
+        .component-nav i {
+            margin-right: 0.5rem;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .component-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .component-nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .component-nav ul li {
+                margin: 0.25rem;
+            }
+            
+            .component-nav ul li a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>装机-爽</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="components.html" class="active"><i class="fas fa-microchip"></i> 电脑配件</a></li>
+                <li><a href="assembly.html"><i class="fas fa-tools"></i> 装机教程</a></li>
+                <li><a href="recommendations.html"><i class="fas fa-list-alt"></i> 配置推荐</a></li>
+                <li><a href="rankings.html"><i class="fas fa-trophy"></i> 配件排名</a></li>
+                <li><a href="troubleshooting.html"><i class="fas fa-wrench"></i> 常见问题</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h2>电脑配件详解</h2>
+            <p>了解各种电脑硬件配件的作用、选择标准和注意事项，为你的装机之旅打好基础。</p>
+        </div>
+    </section>
+
+    <div class="component-nav">
+        <div class="container">
+            <ul>
+                <li><a href="#motherboard"><i class="fas fa-server"></i> 主板</a></li>
+                <li><a href="#ram"><i class="fas fa-memory"></i> 内存</a></li>
+                <li><a href="#cpu"><i class="fas fa-microchip"></i> CPU</a></li>
+                <li><a href="#gpu"><i class="fas fa-tv"></i> 显卡</a></li>
+                <li><a href="#storage"><i class="fas fa-hdd"></i> 存储</a></li>
+                <li><a href="#optical"><i class="fas fa-compact-disc"></i> 光驱</a></li>
+                <li><a href="#cooling"><i class="fas fa-fan"></i> 散热</a></li>
+                <li><a href="#case"><i class="fas fa-desktop"></i> 机箱</a></li>
+                <li><a href="#power"><i class="fas fa-plug"></i> 电源</a></li>
+                <li><a href="#monitor"><i class="fas fa-desktop"></i> 显示器</a></li>
+                <li><a href="#peripherals"><i class="fas fa-keyboard"></i> 外设</a></li>
+                <li><a href="rankings.html"><i class="fas fa-trophy"></i> 配件排名</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <section id="motherboard" class="component-section">
+            <div class="component-header">
+                <div class="component-icon">
+                    <i class="fas fa-server"></i>
+                </div>
+                <h2>主板 (Motherboard)</h2>
+            </div>
+            <div class="component-content">
+                <div class="component-detail">
+                    <p>主板是电脑的"神经中枢"，连接并控制着各个硬件组件之间的通信。选择合适的主板是装机的关键步骤之一。</p>
+                    
+                    <h3>主要参数</h3>
+                    <ul>
+                        <li><strong>芯片组</strong>：决定主板的功能和兼容性</li>
+                        <li><strong>CPU插槽</strong>：必须与CPU型号匹配，如Intel LGA1200或AMD AM4</li>
+                        <li><strong>内存插槽</strong>：数量和支持的内存类型</li>
+                        <li><strong>扩展插槽</strong>：PCIe插槽数量和版本</li>
+                        <li><strong>存储接口</strong>：SATA接口和M.2插槽数量</li>
+                    </ul>
+                    
+                    <h3>常见主板规格</h3>
+                    <ul>
+                        <li><strong>ATX</strong>：标准尺寸，功能最全</li>
+                        <li><strong>mATX</strong>：中型尺寸，适合中小型机箱</li>
+                        <li><strong>ITX</strong>：迷你尺寸，适合小型机箱</li>
+                    </ul>
+                    
+                    <div class="component-warning">
+                        <p><i class="fas fa-exclamation-triangle"></i> <strong>注意：</strong>购买主板前务必确认与CPU型号兼容，并考虑未来升级所需的扩展性。</p>
+                    </div>
+                </div>
+                <div class="component-image">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="主板">
+                </div>
+            </div>
+        </section>
+
+        <section id="ram" class="component-section">
+            <div class="component-header">
+                <div class="component-icon">
+                    <i class="fas fa-memory"></i>
+                </div>
+                <h2>内存 (RAM)</h2>
+            </div>
+            <div class="component-content">
+                <div class="component-detail">
+                    <p>内存是电脑的"短期记忆"，负责暂时存储正在运行的程序和数据，速度比硬盘快很多倍。</p>
+                    
+                    <h3>主要参数</h3>
+                    <ul>
+                        <li><strong>容量</strong>：以GB为单位，常见有8GB、16GB、32GB等</li>
+                        <li><strong>频率</strong>：以MHz为单位，如3200MHz、3600MHz</li>
+                        <li><strong>时序</strong>：如CL16-18-18-36，数字越小越好</li>
+                        <li><strong>代数</strong>：如DDR4、DDR5，不同代数不兼容</li>
+                    </ul>
+                    
+                    <h3>选购建议</h3>
+                    <ul>
+                        <li>普通用户：8-16GB内存足够日常使用</li>
+                        <li>游戏玩家：16-32GB是较好选择</li>
+                        <li>专业工作站：32GB或更高</li>
+                        <li>尽量选择双通道（两条配对使用）提升性能</li>
+                    </ul>
+                    
+                    <div class="component-tips">
+                        <p><i class="fas fa-lightbulb"></i> <strong>小贴士：</strong>内存条最好成对使用（2条或4条），以启用双通道或四通道模式，提升性能。</p>
+                    </div>
+                </div>
+                <div class="component-image">
+                    <img src="https://images.unsplash.com/photo-1562976540-1502c2145186?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="内存">
+                </div>
+            </div>
+        </section>
+
+        <section id="cpu" class="component-section">
+            <div class="component-header">
+                <div class="component-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <h2>CPU (中央处理器)</h2>
+            </div>
+            <div class="component-content">
+                <div class="component-image">
+                    <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="CPU">
+                </div>
+                <div class="component-detail">
+                    <p>CPU是电脑的"大脑"，负责执行计算机程序的指令，控制计算机的运行。</p>
+                    
+                    <h3>主要参数</h3>
+                    <ul>
+                        <li><strong>核心数量</strong>：CPU内包含的处理单元数量，更多的核心可以处理更多并行任务。</li>
+                        <li><strong>线程数量</strong>：一个CPU核心可以同时处理的指令数，通常是核心数的1-2倍。</li>
+                        <li><strong>主频</strong>：CPU的工作频率，单位为GHz，通常越高性能越好。</li>
+                        <li><strong>缓存</strong>：CPU内部的高速内存，对性能有重要影响。</li>
+                        <li><strong>TDP</strong>：热设计功耗，表示CPU最大散热量，单位为瓦特(W)。</li>
+                    </ul>
+                    
+                    <h3>常见品牌与系列</h3>
+                    <ul>
+                        <li><strong>Intel</strong>：酷睿i3/i5/i7/i9系列，主要适合游戏和日常使用</li>
+                        <li><strong>AMD</strong>：锐龙Ryzen系列，性价比较高，多核心优势明显</li>
+                    </ul>
+                    
+                    <div class="component-tips">
+                        <p><i class="fas fa-lightbulb"></i> <strong>小贴士：</strong>选择CPU时，应根据自己的使用需求而定。游戏用户可以优先考虑单核性能更强的CPU，而视频编辑、3D渲染等工作可以选择核心数更多的CPU。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gpu" class="component-section">
+            <div class="component-header">
+                <div class="component-icon">
+                    <i class="fas fa-tv"></i>
+                </div>
+                <h2>显卡 (GPU)</h2>
+            </div>
+            <div class="component-content">
+                <div class="component-image">
+                    <img src="https://images.unsplash.com/photo-1591405351990-4726e331f141?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="显卡">
+                </div>
+                <div class="component-detail">
+                    <p>显卡负责处理图像数据并输出到显示器，对游戏、视频编辑和3D设计至关重要。</p>
+                    
+                    <h3>主要参数</h3>
+                    <ul>
+                        <li><strong>显存容量</strong>：影响处理高分辨率纹理的能力，单位为GB</li>
+                        <li><strong>显存类型</strong>：如GDDR6、GDDR5等，影响数据传输速度</li>
+                        <li><strong>核心频率</strong>：GPU工作频率，单位为MHz</li>
+                        <li><strong>流处理器数量</strong>：并行处理单元数量，越多性能越强</li>
+                        <li><strong>TDP</strong>：功耗指标，决定所需电源功率和散热需求</li>
+                    </ul>
+                    
+                    <h3>常见品牌</h3>
+                    <ul>
+                        <li><strong>NVIDIA</strong>：GeForce系列，如RTX 3060、RTX 3070等</li>
+                        <li><strong>AMD</strong>：Radeon系列，如RX 6700 XT、RX 6800等</li>
+                    </ul>
+                    
+                    <div class="component-tips">
+                        <p><i class="fas fa-lightbulb"></i> <strong>小贴士：</strong>显卡的价格与性能呈正比，根据自己的预算和需求选择。对于游戏玩家来说，显卡通常是最值得投资的组件。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="storage" class="component-section">
+            <div class="component-header">
+                <div class="component-icon">
+                    <i class="fas fa-hdd"></i>
+                </div>
+                <h2>存储设备</h2>
+            </div>
+            <div class="component-content">
+                <div class="component-image">
+                    <img src="https://images.unsplash.com/photo-1597838816882-4435b1977fbe?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="存储设备">
+                </div>
+                <div class="component-detail">
+                    <p>存储设备负责长期保存数据，包括操作系统、软件和个人文件。</p>
+                    
+                    <h3>主要类型</h3>
+                    <ul>
+                        <li><strong>机械硬盘(HDD)</strong>：价格便宜，容量大，但速度较慢</li>
+                        <li><strong>固态硬盘(SSD)</strong>：速度快，寿命长，但价格较高
+                            <ul>
+                                <li>SATA SSD：接口通用，速度中等</li>
+                                <li>NVMe SSD：速度最快，通过M.2接口连接</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <h3>存储方案建议</h3>
+                    <ul>
+                        <li>系统盘：建议使用SSD，至少256GB(推荐512GB)</li>
+                        <li>数据盘：可使用大容量机械硬盘存储视频、照片等大文件</li>
+                        <li>游戏玩家：游戏最好安装在SSD上，可大幅减少加载时间</li>
+                    </ul>
+                    
+                    <div class="component-tips">
+                        <p><i class="fas fa-lightbulb"></i> <strong>小贴士：</strong>使用SSD作为系统盘是提升电脑整体体验的最佳方式之一，强烈建议至少为系统配置一块SSD。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="optical" class="component-section">
+            <div class="container">
+                <div class="component-header">
+                    <div class="component-icon">
+                        <i class="fas fa-compact-disc"></i>
+                    </div>
+                    <h2>光驱设备</h2>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="component-description">
+                            <p>光驱是用于读取和写入光盘的设备。虽然在云存储和数字下载普及的今天，光驱的使用频率已经大幅降低，但对于某些特定场景（如播放蓝光电影、安装老旧软件、读取光盘资料）仍有其价值。</p>
+                            
+                            <h3>主要类型</h3>
+                            <ul class="feature-list">
+                                <li><strong>DVD刻录机</strong>：可读写DVD和CD光盘，价格便宜，足够满足基础需求</li>
+                                <li><strong>蓝光光驱</strong>：可读取高清蓝光光盘，部分型号支持蓝光刻录</li>
+                                <li><strong>外置光驱</strong>：通过USB接口连接，适合超薄笔记本或无光驱机箱使用</li>
+                            </ul>
+                            
+                            <div class="specs-box">
+                                <h4>接口类型</h4>
+                                <ul>
+                                    <li><strong>SATA</strong>：目前最常见的内置光驱接口</li>
+                                    <li><strong>USB</strong>：外置光驱常用接口，通常为USB 3.0或Type-C</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="component-image">
+                            <img src="https://images.unsplash.com/photo-1595246875642-b391e11afe5c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="光驱设备图片" class="img-fluid rounded shadow">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="component-details">
+                    <h3>选择要点</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-tachometer-alt"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>读写速度</h4>
+                                <p>光驱的读写速度以"X"为单位，数值越大速度越快。例如DVD 24X，蓝光12X等。</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-volume-down"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>噪音控制</h4>
+                                <p>光盘高速旋转可能产生较大噪音。选择支持静音模式的光驱可以改善观影体验。</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>兼容性</h4>
+                                <p>确保机箱有5.25英寸光驱位（如果是内置光驱），或者选择外置USB光驱以兼容任何电脑。</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>格式支持</h4>
+                                <p>确认光驱支持您需要的光盘格式，特别是对于特殊格式如蓝光4K UHD等。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recommendations">
+                    <h3>推荐品牌与型号</h3>
+                    <div class="recommendation-cards">
+                        <div class="rec-card">
+                            <h4>内置DVD光驱</h4>
+                            <ul>
+                                <li>华硕 DRW-24D5MT</li>
+                                <li>建兴 IHAS124</li>
+                                <li>三星 SH-224GB</li>
+                            </ul>
+                        </div>
+                        <div class="rec-card">
+                            <h4>内置蓝光光驱</h4>
+                            <ul>
+                                <li>先锋 BDR-S12UHT</li>
+                                <li>华硕 BW-16D1HT</li>
+                                <li>建兴 IHBS112</li>
+                            </ul>
+                        </div>
+                        <div class="rec-card">
+                            <h4>外置光驱</h4>
+                            <ul>
+                                <li>华硕 SDRW-08U9M-U (DVD)</li>
+                                <li>绿联 Type-C外置DVD刻录机</li>
+                                <li>先锋 BDR-XD07B (蓝光)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="component-tips">
+                    <h3>使用小贴士</h3>
+                    <div class="tips-container">
+                        <div class="tip-item">
+                            <i class="fas fa-check-circle"></i>
+                            <p>现代机箱越来越少配备光驱位，在选购机箱前确认是否需要安装内置光驱。</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-check-circle"></i>
+                            <p>如果很少使用光驱，建议选择外置USB光驱，需要时才连接，更加灵活。</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-check-circle"></i>
+                            <p>蓝光播放可能需要专用软件支持，请确认系统中安装了适当的蓝光播放软件。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cooling" class="component-section">
+            <div class="container">
+                <div class="component-header">
+                    <div class="component-icon">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <h2>散热设备</h2>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="component-image">
+                            <img src="https://images.unsplash.com/photo-1587202372686-9e5b6a7f7e59?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="散热设备图片" class="img-fluid rounded shadow">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="component-description">
+                            <p>散热器是维持CPU和其他组件正常工作温度的关键部件。良好的散热不仅能保障系统稳定性，还能提升硬件性能和使用寿命，是整机性能发挥的重要保障。</p>
+                            
+                            <h3>主要类型</h3>
+                            <ul class="feature-list">
+                                <li><strong>风冷散热器</strong>：使用金属导热管和散热片，配合风扇散热，性价比高，安装简单</li>
+                                <li><strong>一体式水冷 (AIO)</strong>：采用封闭式水冷循环系统，散热效率高，外观美观</li>
+                                <li><strong>定制水冷</strong>：完全自定义的水冷系统，散热性能最佳，但成本高，安装复杂</li>
+                                <li><strong>被动式散热</strong>：无风扇设计，完全依靠散热片，适合追求极致静音的场景</li>
+                            </ul>
+                            
+                            <div class="specs-box">
+                                <h4>散热器选择建议</h4>
+                                <ul>
+                                    <li>入门级CPU (65W TDP)：塔式风冷或原装散热器</li>
+                                    <li>中端CPU (95-125W TDP)：中高端风冷或240mm水冷</li>
+                                    <li>高端CPU (125-165W TDP)：高端双塔风冷或280/360mm水冷</li>
+                                    <li>极端超频：360mm以上高端水冷或定制水冷</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="component-details">
+                    <h3>选择要点</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-thermometer-half"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>散热能力</h4>
+                                <p>要根据CPU的TDP值选择合适的散热器。散热能力越强，CPU可以在高负载下保持更低的温度，获得更好的性能。</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-ruler-combined"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>尺寸兼容性</h4>
+                                <p>确保散热器与机箱和主板兼容。大型塔式散热器可能会与内存或显卡冲突，水冷散热器需要机箱有安装位置。</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-volume-down"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>噪音控制</h4>
+                                <p>考虑风扇的噪声水平。大尺寸风扇通常在相同散热效果下噪音更低。寻找具有智能风扇控制的型号。</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>安装难度</h4>
+                                <p>风冷散热器安装较为简单，一体式水冷安装难度中等，定制水冷系统安装复杂，需要专业知识和工具。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recommendations">
+                    <h3>推荐品牌与型号</h3>
+                    <div class="recommendation-cards">
+                        <div class="rec-card">
+                            <h4>入门级风冷</h4>
+                            <ul>
+                                <li>九州风神 玄冰400/500</li>
+                                <li>利民 AX120 R SE</li>
+                                <li>ID-COOLING SE-224-XT Basic</li>
+                            </ul>
+                        </div>
+                        <div class="rec-card">
+                            <h4>高端风冷</h4>
+                            <ul>
+                                <li>猫头鹰 NH-D15</li>
+                                <li>九州风神 大霜塔</li>
+                                <li>利民 FC140</li>
+                            </ul>
+                        </div>
+                        <div class="rec-card">
+                            <h4>一体式水冷</h4>
+                            <ul>
+                                <li>海盗船 H150i ELITE CAPELLIX</li>
+                                <li>NZXT Kraken X73</li>
+                                <li>酷冷至尊 ML360R RGB</li>
+                                <li>ROG RYUO III 360</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="component-tips">
+                    <h3>散热小贴士</h3>
+                    <div class="tips-container">
+                        <div class="tip-item">
+                            <i class="fas fa-check-circle"></i>
+                            <p>为CPU安装散热器前，一定要涂抹合适量的导热硅脂以确保良好的热传导。</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-check-circle"></i>
+                            <p>确保机箱内有良好的气流循环，通常是前部和底部进风，顶部和后部出风。</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-check-circle"></i>
+                            <p>水冷散热器通常寿命为3-5年，使用时间过长需注意可能的泄漏风险。</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-check-circle"></i>
+                            <p>定期清理散热器上的灰尘，以保持最佳散热效果。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="case" class="component-section">
+            <div class="container">
+                <div class="component-header">
+                    <div class="component-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h2>机箱设备</h2>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="component-image">
+                            <img src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="机箱设备图片" class="img-fluid rounded shadow">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="component-description">
+                            <p>机箱是电脑的外壳，不仅承载和保护所有硬件组件，还决定了电脑的散热性能、扩展性以及整体外观。选择合适的机箱对于构建一台稳定可靠的电脑至关重要。</p>
+                            
+                            <h3>主要类型</h3>
+                            <ul class="feature-list">
+                                <li><strong>全塔 (Full Tower)</strong>：最大的机箱类型，提供最佳的硬件兼容性和扩展性，适合高端工作站和发烧级配置</li>
+                                <li><strong>中塔 (Mid Tower)</strong>：最常见的机箱类型，平衡了尺寸与兼容性，适合大多数家用和游戏电脑</li>
+                                <li><strong>小型机箱 (Mini Tower)</strong>：尺寸更紧凑，适合空间有限的办公环境或客厅</li>
+                                <li><strong>ITX 迷你机箱</strong>：极小体积设计，通常只支持 ITX 主板，适合追求便携性的用户</li>
+                            </ul>
+                            
+                            <div class="specs-box">
+                                <h4>机箱尺寸与主板兼容性</h4>
+                                <ul>
+                                    <li>全塔：支持E-ATX、ATX、M-ATX、ITX主板</li>
+                                    <li>中塔：通常支持ATX、M-ATX、ITX主板</li>
+                                    <li>小型机箱：通常支持M-ATX、ITX主板</li>
+                                    <li>ITX机箱：通常只支持ITX主板</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="component-details">
+                    <h3>选择要点</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>散热设计</h4>
+                                <p>良好的散热设计包括多个风扇位、优化的气流路径和足够的通风孔。网格前面板通常提供比实心面板更好的进气效果。</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-expand-arrows-alt"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>扩展性</h4>
+                                <p>考虑未来可能的升级需求。确认机箱支持的显卡长度、CPU散热器高度、硬盘数量和水冷散热器安装位置。</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>外观设计</h4>
+                                <p>机箱决定电脑的整体外观。现代机箱提供侧透设计、RGB灯效和多种颜色选择，可以根据个人喜好选择。</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>前置接口</h4>
+                                <p>确保机箱前面板有足够的USB接口(包括USB-C)和音频接口，以方便日常使用。高端机箱通常配备更多现代接口。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recommendations">
+                    <h3>推荐品牌与型号</h3>
+                    <div class="recommendation-cards">
+                        <div class="rec-card">
+                            <h4>入门级</h4>
+                            <ul>
+                                <li>安钛克 NX292</li>
+                                <li>爱国者 黑暗骑士 T16</li>
+                                <li>航嘉 启航者 / 冰钻</li>
+                            </ul>
+                        </div>
+                        <div class="rec-card">
+                            <h4>中端游戏</h4>
+                            <ul>
+                                <li>酷冷至尊 TD500 Mesh</li>
+                                <li>追风者 P360A</li>
+                                <li>NZXT H510 Flow</li>
+                                <li>安钛克 DF700 FLUX</li>
+                            </ul>
+                        </div>
+                        <div class="rec-card">
+                            <h4>高端/特色</h4>
+                            <ul>
+                                <li>联力 PC-O11 Dynamic</li>
+                                <li>Be Quiet! Pure Base 500DX</li>
+                                <li>酷冷至尊 H500M</li>
+                                <li>分形工艺 Define 7</li>
+                            </ul>
+                        </div>
+                        <div class="rec-card">
+                            <h4>Mini-ITX 小型</h4>
+                            <ul>
+                                <li>森泰 T7</li>
+                                <li>NZXT H210</li>
+                                <li>酷冷至尊 NR200P</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="component-tips">
+                    <h3>机箱小贴士</h3>
+                    <div class="tips-container">
+                        <div class="tip-item">
+                            <i class="fas fa-check-circle"></i>
+                            <p>理线管理：好的机箱应提供足够的走线空间和理线孔，帮助整理内部线缆，提升美观和气流。</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-check-circle"></i>
+                            <p>防尘设计：寻找带有可拆卸防尘网的机箱，可以大大减少日后的清洁维护频率。</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-check-circle"></i>
+                            <p>静音设计：如果追求安静的使用环境，选择带有隔音棉的机箱，并注意风扇配置。</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-check-circle"></i>
+                            <p>考虑RGB控制：如果喜欢RGB灯效，确保机箱有集成RGB控制器或与主流RGB生态系统兼容。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="power" class="component-section">
+            <div class="container">
+                <div class="component-header">
+                    <div class="component-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h2>电源设备</h2>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="component-image">
+                            <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="电源设备图片" class="img-fluid rounded shadow">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="component-description">
+                            <p>电源是电脑的心脏，负责将交流电转换为电脑所需的直流电，为所有组件供电。高质量的电源可以提供稳定电流，保护硬件安全，延长使用寿命。</p>
+                            
+                            <h3>主要类型</h3>
+                            <ul class="feature-list">
+                                <li><strong>80 Plus认证</strong>：评估电源效率的标准，从低到高分为白牌、铜牌、银牌、金牌、白金、钛金</li>
+                                <li><strong>模组化程度</strong>：
+                                    <ul>
+                                        <li>全模组：所有线缆可拆卸，方便布线和管理</li>
+                                        <li>半模组：必要线缆固定，其他可拆卸</li>
+                                        <li>非模组：所有线缆固定，无法拆卸</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            
+                            <div class="specs-box">
+                                <h4>电源选择建议</h4>
+                                <ul>
+                                    <li>入门级配置：450W-550W (白牌/铜牌)</li>
+                                    <li>中端游戏配置：650W-750W (金牌)</li>
+                                    <li>高端游戏/工作站：850W-1000W (金牌/白金)</li>
+                                    <li>顶级发烧配置：1000W以上 (白金/钛金)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="component-details">
+                    <h3>选择要点</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>功率预算</h4>
+                                <p>计算所有组件的总功耗，再额外预留30%的余量。例如：如果计算出总功耗为500W，则推荐选择650W电源。</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>认证等级</h4>
+                                <p>优先选择80 Plus金牌或以上认证的电源，效率更高，发热更少，长期使用可节省电费。</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>安全保护</h4>
+                                <p>优质电源具有OVP(过压保护)、UVP(欠压保护)、OPP(过功率保护)、SCP(短路保护)等多重保护机制。</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>静音性能</h4>
+                                <p>部分高端电源具有零风扇模式，在低负载时风扇停转，提供安静的使用体验。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recommendations">
+                    <h3>推荐品牌与型号</h3>
+                    <div class="recommendation-cards">
+                        <div class="rec-card">
+                            <h4>入门级</h4>
+                            <ul>
+                                <li>酷冷至尊 MWE V2 550W 铜牌</li>
+                                <li>安钛克 NE550 金牌</li>
+                                <li>鑫谷 GP600G 金牌</li>
+                            </ul>
+                        </div>
+                        <div class="rec-card">
+                            <h4>中端</h4>
+                            <ul>
+                                <li>海韵 FOCUS GX-750 金牌全模组</li>
+                                <li>振华 LEADEX G 750W 金牌全模组</li>
+                                <li>酷冷至尊 V750 金牌全模组</li>
+                            </ul>
+                        </div>
+                        <div class="rec-card">
+                            <h4>高端</h4>
+                            <ul>
+                                <li>海韵 PRIME 1000W 白金全模组</li>
+                                <li>振华 LEADEX III 1000W 金牌全模组</li>
+                                <li>美商海盗船 HX1000i 白金数字全模组</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="monitor" class="component-section">
+            <div class="container">
+                <div class="component-header">
+                    <div class="component-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h2>显示器</h2>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="component-image">
+                            <img src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="显示器图片" class="img-fluid rounded shadow">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="component-description">
+                            <p>显示器是计算机系统的视觉输出设备，直接影响用户的视觉体验。选择合适的显示器对于不同用途（如游戏、办公、设计）至关重要，会极大影响工作效率和视觉舒适度。</p>
+                            
+                            <h3>主要参数</h3>
+                            <ul class="feature-list">
+                                <li><strong>尺寸</strong>：通常以对角线英寸数表示，常见有21.5、24、27、32英寸等</li>
+                                <li><strong>分辨率</strong>：屏幕像素数量，如1080p(1920×1080)、2K(2560×1440)、4K(3840×2160)</li>
+                                <li><strong>面板类型</strong>：
+                                    <ul>
+                                        <li>IPS：色彩准确，视角广，响应速度适中</li>
+                                        <li>VA：对比度高，色彩表现佳，响应速度中等</li>
+                                        <li>TN：响应速度快，价格便宜，色彩和视角较差</li>
+                                        <li>OLED：极高对比度和色彩，但价格高昂</li>
+                                    </ul>
+                                </li>
+                                <li><strong>刷新率</strong>：每秒画面更新次数，60Hz、144Hz、240Hz等，越高越流畅</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="component-details">
+                    <h3>选择要点</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>游戏需求</h4>
+                                <p>游戏玩家应优先考虑高刷新率(144Hz+)和低响应时间(1ms)的显示器，支持G-Sync或FreeSync技术可减少画面撕裂。</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>专业创作</h4>
+                                <p>设计师和内容创作者应选择色彩准确的IPS面板，高色域覆盖(100% sRGB或AdobeRGB)，最好具备工厂校色。</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>办公需求</h4>
+                                <p>日常办公适合选择舒适的尺寸(24-27英寸)，合适的分辨率，抗蓝光和防眩光功能，以及可调节支架。</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>接口选择</h4>
+                                <p>确保有足够的接口类型(HDMI、DisplayPort、USB-C等)，并与显卡输出匹配。高刷新率或高分辨率需要更高版本的接口支持。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recommendations">
+                    <h3>推荐品牌与型号</h3>
+                    <div class="recommendation-cards">
+                        <div class="rec-card">
+                            <h4>入门级 (1080p)</h4>
+                            <ul>
+                                <li>AOC 24G2 (144Hz, IPS)</li>
+                                <li>明基 GW2480 (60Hz, IPS)</li>
+                                <li>飞利浦 242E1GSJ (144Hz, VA)</li>
+                            </ul>
+                        </div>
+                        <div class="rec-card">
+                            <h4>中端游戏 (2K)</h4>
+                            <ul>
+                                <li>华硕 TUF VG27AQ (165Hz, IPS)</li>
+                                <li>三星 Odyssey G7 (240Hz, VA)</li>
+                                <li>LG 27GP850 (180Hz, IPS)</li>
+                            </ul>
+                        </div>
+                        <div class="rec-card">
+                            <h4>专业设计</h4>
+                            <ul>
+                                <li>戴尔 UP2720Q (4K, IPS, 预校色)</li>
+                                <li>明基 PD2700U (4K, IPS, sRGB 100%)</li>
+                                <li>华硕 ProArt PA278CV (2K, IPS)</li>
+                            </ul>
+                        </div>
+                        <div class="rec-card">
+                            <h4>高端旗舰</h4>
+                            <ul>
+                                <li>LG C2 42寸 (4K OLED 120Hz)</li>
+                                <li>华硕 PG32UQX (4K 144Hz Mini-LED)</li>
+                                <li>三星 Neo G9 (5120×1440 超宽屏)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="peripherals" class="component-section">
+            <div class="container">
+                <div class="component-header">
+                    <div class="component-icon">
+                        <i class="fas fa-keyboard"></i>
+                    </div>
+                    <h2>键盘鼠标等外设</h2>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="component-description">
+                            <p>键盘、鼠标和其他外设是用户与电脑交互的直接界面，良好的外设可以提高工作效率、游戏体验和使用舒适度。外设的选择非常个人化，应根据自己的使用习惯和需求选择。</p>
+                            
+                            <h3>键盘类型</h3>
+                            <ul class="feature-list">
+                                <li><strong>机械键盘</strong>：使用独立机械开关，按键反馈明显，耐用性高，多种轴体选择
+                                    <ul>
+                                        <li>青轴：段落感强，声音响亮，适合打字</li>
+                                        <li>红轴：线性无段落感，声音小，适合游戏</li>
+                                        <li>茶轴：中等段落感，声音适中，全能型</li>
+                                        <li>黑轴：线性无段落感，较重按压力，适合特定游戏</li>
+                                    </ul>
+                                </li>
+                                <li><strong>薄膜键盘</strong>：结构简单，价格便宜，声音较小，手感较软</li>
+                                <li><strong>笔记本式键盘</strong>：超薄设计，行程短，适合办公和便携</li>
+                            </ul>
+                            
+                            <h3>鼠标类型</h3>
+                            <ul class="feature-list">
+                                <li><strong>光电鼠标</strong>：普通精度，适合日常使用</li>
+                                <li><strong>激光鼠标</strong>：高精度，适用于各种表面</li>
+                                <li><strong>游戏鼠标</strong>：高DPI、低延迟、可编程按键</li>
+                                <li><strong>人体工学鼠标</strong>：垂直握持或特殊形状，减轻腕部压力</li>
+                                <li><strong>无线鼠标</strong>：摆脱线缆束缚，现代无线技术延迟极低</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="component-image">
+                            <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="键盘鼠标外设图片" class="img-fluid rounded shadow">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="component-details">
+                    <h3>选择要点</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-hand-pointer"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>使用场景</h4>
+                                <p>针对不同使用场景选择合适外设：专业游戏需高性能游戏外设；长时间打字需舒适键盘；设计工作可考虑数位板等专业设备。</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>连接方式</h4>
+                                <p>有线外设提供稳定连接和无需充电；无线外设提供更大自由度，现代技术已使延迟差异微乎其微。</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>个人体验</h4>
+                                <p>外设是高度个人化的选择，尽量亲自试用体验手感、重量和舒适度，尤其是长时间使用的场景。</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>附加功能</h4>
+                                <p>评估是否需要宏编程、RGB灯效、多设备切换、自定义按键等功能，这些可能会影响价格和使用体验。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recommendations">
+                    <h3>推荐品牌与型号</h3>
+                    <div class="recommendation-cards">
+                        <div class="rec-card">
+                            <h4>入门级键鼠</h4>
+                            <ul>
+                                <li>罗技 MK120 键鼠套装</li>
+                                <li>雷柏 V500 机械键盘</li>
+                                <li>罗技 G102 游戏鼠标</li>
+                            </ul>
+                        </div>
+                        <div class="rec-card">
+                            <h4>中端游戏外设</h4>
+                            <ul>
+                                <li>达尔优 A87 机械键盘</li>
+                                <li>罗技 G502 HERO 游戏鼠标</li>
+                                <li>HyperX Alloy FPS Pro 机械键盘</li>
+                            </ul>
+                        </div>
+                        <div class="rec-card">
+                            <h4>高端办公外设</h4>
+                            <ul>
+                                <li>罗技 MX Keys + MX Master 3</li>
+                                <li>微软 Surface 人体工学键盘</li>
+                                <li>HHKB Professional 2</li>
+                            </ul>
+                        </div>
+                        <div class="rec-card">
+                            <h4>其他实用外设</h4>
+                            <ul>
+                                <li>Wacom Intuos 数位板（设计）</li>
+                                <li>Stream Deck（直播控制）</li>
+                                <li>罗技 G29/G920（赛车游戏方向盘）</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="component-tips">
+                    <h3>外设小贴士</h3>
+                    <div class="tips-container">
+                        <div class="tip-item">
+                            <i class="fas fa-check-circle"></i>
+                            <p>配备优质鼠标垫可以提升鼠标的跟踪精度和使用寿命。</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-check-circle"></i>
+                            <p>长时间使用电脑，应考虑人体工学设备和护腕垫，保护手部健康。</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-check-circle"></i>
+                            <p>定期清洁键盘和鼠标，可以延长使用寿命并保持良好的卫生状况。</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-check-circle"></i>
+                            <p>对于无线外设，选择可充电或使用可充电电池的产品，更环保且长期使用更经济。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="cta">
+        <div class="container">
+            <h2>准备好开始装机了吗？</h2>
+            <p>了解了各个配件的功能和选购要点后，让我们一起进入装机教程吧！</p>
+            <div class="cta-buttons">
+                <a href="assembly.html" class="btn">查看装机教程 <i class="fas fa-tools"></i></a>
+                <a href="recommendations.html" class="btn btn-alt">浏览配置推荐 <i class="fas fa-list-alt"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>装机-爽</h2>
+                    <p>小白装机指南，让装机变得简单</p>
+                </div>
+                <div class="footer-links">
+                    <h3>快速导航</h3>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="components.html">电脑配件</a></li>
+                        <li><a href="assembly.html">装机教程</a></li>
+                        <li><a href="recommendations.html">配置推荐</a></li>
+                        <li><a href="troubleshooting.html">常见问题</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 装机-爽 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

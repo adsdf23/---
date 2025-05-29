@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>装机-爽 | 小白装机指南</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1587202372616-b43abea06c2a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 8rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+        
+        .hero-buttons {
+            animation: fadeInUp 1s ease 0.4s;
+            animation-fill-mode: both;
+        }
+        
+        .features {
+            padding: 5rem 0;
+            background-color: #f9f9f9;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            height: 70px;
+            width: 70px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .guides {
+            padding: 5rem 0;
+        }
+        
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .guide-card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            height: 250px;
+            display: flex;
+            align-items: flex-end;
+        }
+        
+        .guide-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .guide-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            z-index: 1;
+        }
+        
+        .guide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .guide-card:hover .guide-bg {
+            transform: scale(1.1);
+        }
+        
+        .guide-content {
+            position: relative;
+            z-index: 2;
+            padding: 1.5rem;
+            width: 100%;
+        }
+        
+        .guide-title {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .guide-meta {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .guide-meta i {
+            margin-right: 0.5rem;
+        }
+        
+        .guide-cpu .guide-bg {
+            background-image: url('https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        }
+        
+        .guide-gpu .guide-bg {
+            background-image: url('https://images.unsplash.com/photo-1587202372634-32705e3bf49c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        }
+        
+        .guide-memory .guide-bg {
+            background-image: url('https://images.unsplash.com/photo-1562976540-1502c2145186?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        }
+        
+        .guide-motherboard .guide-bg {
+            background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        }
+        
+        .cta {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .hero {
+                padding: 6rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .feature-grid, .guide-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>装机-爽</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="components.html"><i class="fas fa-microchip"></i> 电脑配件</a></li>
+                <li><a href="assembly.html"><i class="fas fa-tools"></i> 装机教程</a></li>
+                <li><a href="recommendations.html"><i class="fas fa-list-alt"></i> 配置推荐</a></li>
+                <li><a href="troubleshooting.html"><i class="fas fa-wrench"></i> 常见问题</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>让电脑装机变得简单</h1>
+            <p>无论您是电脑小白还是有经验的玩家，我们都为您提供最全面、最易懂的装机指南和配件知识</p>
+            <div class="hero-buttons">
+                <a href="assembly.html" class="btn">开始装机之旅 <i class="fas fa-arrow-right"></i></a>
+                <a href="components.html" class="btn btn-alt">了解电脑配件 <i class="fas fa-microchip"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>为什么选择自己组装电脑？</h2>
+                <p>自己动手组装电脑不仅可以省钱，还能获得完全符合您需求的配置和宝贵的经验</p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3 class="feature-title">省钱更划算</h3>
+                    <p>相比购买品牌机，自己组装可以节省10%-30%的费用，让您的预算得到更充分利用。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sliders-h"></i>
+                    </div>
+                    <h3 class="feature-title">个性化定制</h3>
+                    <p>根据自己的需求选择每一个配件，打造完全符合您使用场景的理想电脑。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="feature-title">学习体验</h3>
+                    <p>亲手组装电脑是一次宝贵的学习经历，让您对电脑硬件有更深入的了解。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="guides">
+        <div class="container">
+            <div class="section-title">
+                <h2>热门装机指南</h2>
+                <p>浏览我们最受欢迎的硬件指南和教程，开启您的装机之旅</p>
+            </div>
+
+            <div class="guide-grid">
+                <a href="cpu-guide.html" class="guide-card guide-cpu">
+                    <div class="guide-bg"></div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">如何选择适合的CPU</h3>
+                        <div class="guide-meta">
+                            <i class="fas fa-clock"></i> 阅读时间：10分钟
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="gpu-guide.html" class="guide-card guide-gpu">
+                    <div class="guide-bg"></div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">游戏显卡选购指南</h3>
+                        <div class="guide-meta">
+                            <i class="fas fa-clock"></i> 阅读时间：12分钟
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="ram-install.html" class="guide-card guide-memory">
+                    <div class="guide-bg"></div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">内存条安装教程</h3>
+                        <div class="guide-meta">
+                            <i class="fas fa-clock"></i> 阅读时间：5分钟
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="motherboard-guide.html" class="guide-card guide-motherboard">
+                    <div class="guide-bg"></div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">主板安装详解</h3>
+                        <div class="guide-meta">
+                            <i class="fas fa-clock"></i> 阅读时间：15分钟
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>准备好开始您的装机之旅了吗？</h2>
+            <p>按照我们的指南，即使是电脑小白也能轻松组装出一台高性能电脑！</p>
+            <div class="cta-buttons">
+                <a href="components.html" class="btn">了解电脑配件 <i class="fas fa-microchip"></i></a>
+                <a href="recommendations.html" class="btn btn-alt">查看推荐配置 <i class="fas fa-list-alt"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>装机-爽</h2>
+                    <p>小白装机指南，让装机变得简单</p>
+                </div>
+                <div class="footer-links">
+                    <h3>快速导航</h3>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="components.html">电脑配件</a></li>
+                        <li><a href="assembly.html">装机教程</a></li>
+                        <li><a href="recommendations.html">配置推荐</a></li>
+                        <li><a href="troubleshooting.html">常见问题</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 装机-爽 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

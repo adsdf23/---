@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常见问题 | 装机-爽</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1563770660941-3bece0760765?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .page-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .page-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .faq-search {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .search-box {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-box input {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .search-box button {
+            padding: 12px 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .faq-categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .category-btn {
+            padding: 10px 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .category-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .category-btn:hover:not(.active) {
+            background-color: #f5f5f5;
+        }
+        
+        .faq-section {
+            margin-bottom: 3rem;
+        }
+        
+        .faq-title {
+            color: var(--dark);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+            display: inline-block;
+        }
+        
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .faq-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-question {
+            padding: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: var(--dark);
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 1.2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            border-top: 0px solid #eee;
+        }
+        
+        .faq-answer.show {
+            padding: 1.2rem;
+            max-height: 500px;
+            border-top: 1px solid #eee;
+        }
+        
+        .faq-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .faq-content ul {
+            list-style: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .faq-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .faq-tip {
+            background-color: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .faq-warning {
+            background-color: rgba(243, 156, 18, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .faq-categories {
+                flex-direction: row;
+                overflow-x: auto;
+                padding-bottom: 1rem;
+            }
+            
+            .category-btn {
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>装机-爽</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="components.html"><i class="fas fa-microchip"></i> 电脑配件</a></li>
+                <li><a href="assembly.html"><i class="fas fa-tools"></i> 装机教程</a></li>
+                <li><a href="recommendations.html"><i class="fas fa-list-alt"></i> 配置推荐</a></li>
+                <li><a href="troubleshooting.html" class="active"><i class="fas fa-wrench"></i> 常见问题</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h2>装机常见问题</h2>
+            <p>解答装机过程中可能遇到的各种疑难问题，让您的装机之旅更加顺利。</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="faq-search">
+            <div class="search-box">
+                <input type="text" id="faq-search-input" placeholder="搜索问题...">
+                <button id="faq-search-button"><i class="fas fa-search"></i> 搜索</button>
+            </div>
+        </div>
+
+        <div class="faq-categories">
+            <button class="category-btn active" data-category="all">全部问题</button>
+            <button class="category-btn" data-category="hardware">硬件问题</button>
+            <button class="category-btn" data-category="install">安装问题</button>
+            <button class="category-btn" data-category="power">开机问题</button>
+            <button class="category-btn" data-category="bios">BIOS设置</button>
+        </div>
+
+        <!-- 硬件问题部分 -->
+        <section class="faq-section" id="hardware-section">
+            <h2 class="faq-title">硬件问题</h2>
+            <div class="faq-list">
+                <div class="faq-item" data-category="hardware">
+                    <div class="faq-question">
+                        <span>如何确定主板和CPU是否兼容？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-content">
+                            <p>确定主板和CPU兼容性主要需要检查以下几点：</p>
+                            <ul>
+                                <li><strong>插槽类型：</strong> CPU和主板必须使用相同的插槽类型，例如Intel的LGA1700或AMD的AM4等。</li>
+                                <li><strong>芯片组支持：</strong> 主板的芯片组必须支持该CPU型号。例如，Intel的B660主板支持第12代和第13代酷睿处理器。</li>
+                                <li><strong>BIOS版本：</strong> 有时即使插槽相同，也可能需要更新BIOS才能支持新一代的CPU。</li>
+                            </ul>
+                            <div class="faq-tip">
+                                <p><i class="fas fa-lightbulb"></i> <strong>提示：</strong> 您可以在主板官网查看CPU兼容列表，或使用像PCPartPicker这样的工具来检查兼容性。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="hardware">
+                    <div class="faq-question">
+                        <span>内存条安装有什么注意事项？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-content">
+                            <p>内存条安装需要注意以下几点：</p>
+                            <ul>
+                                <li>首先确认内存的代数（如DDR4、DDR5）与主板支持的类型一致</li>
+                                <li>双通道安装时，通常应将内存条插入相同颜色的插槽中</li>
+                                <li>如果只有两条内存，通常应该安装在插槽A2和B2（或标记为2和4的插槽）</li>
+                                <li>插入时需要对准内存条上的缺口</li>
+                                <li>安装时必须用力按压两端直至卡扣自动合上</li>
+                            </ul>
+                            <div class="faq-warning">
+                                <p><i class="fas fa-exclamation-triangle"></i> <strong>注意：</strong> 安装内存时需要一定的力度，但应该均匀用力，避免内存条弯曲。听到"咔哒"声表示安装到位。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="hardware">
+                    <div class="faq-question">
+                        <span>如何选择合适的电源功率？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-content">
+                            <p>选择合适的电源功率需要考虑以下因素：</p>
+                            <ul>
+                                <li>计算所有组件的总功耗，包括CPU、显卡、主板、硬盘等</li>
+                                <li>通常建议电源功率比计算结果高30%左右，为后续升级留有余量</li>
+                                <li>高端显卡（如RTX 3080及以上）和高端CPU（如i9、Ryzen 9）组合通常需要750W以上电源</li>
+                                <li>中端配置（如RTX 3060Ti和i5/Ryzen 5）通常需要550-650W电源</li>
+                                <li>办公配置无独立显卡通常300-450W即可</li>
+                            </ul>
+                            <p>此外，电源的品质（80 PLUS认证级别）也很重要，推荐选择金牌或以上认证的电源以保证稳定性和效率。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 安装问题部分 -->
+        <section class="faq-section" id="install-section">
+            <h2 class="faq-title">安装问题</h2>
+            <div class="faq-list">
+                <div class="faq-item" data-category="install">
+                    <div class="faq-question">
+                        <span>处理器上应该涂多少散热硅脂？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-content">
+                            <p>散热硅脂的正确用量是关键，太少会导致散热不足，太多则可能溢出影响其他组件：</p>
+                            <ul>
+                                <li>通常使用大约米粒大小的硅脂，放在CPU表面中央</li>
+                                <li>安装散热器后，硅脂会在压力下自然扩散铺开</li>
+                                <li>不需要手动涂抹均匀，安装散热器时会自然扩散</li>
+                                <li>如果散热器已预涂硅脂，则无需再涂</li>
+                            </ul>
+                            <div class="faq-tip">
+                                <p><i class="fas fa-lightbulb"></i> <strong>提示：</strong> 更换硅脂前，请用酒精和纯棉巾清洁CPU和散热器底部的旧硅脂。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="install">
+                    <div class="faq-question">
+                        <span>如何正确安装显卡？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-content">
+                            <p>显卡安装步骤如下：</p>
+                            <ol>
+                                <li>找到主板上的PCIe x16插槽（通常是最长的PCIe插槽，靠近CPU位置）</li>
+                                <li>打开插槽末端的卡扣</li>
+                                <li>拆除机箱上对应PCIe插槽的挡板</li>
+                                <li>将显卡金手指对准PCIe插槽，垂直插入</li>
+                                <li>确保显卡完全插入，卡扣自动锁定</li>
+                                <li>用螺丝将显卡固定在机箱上</li>
+                                <li>连接所需的电源线（6针、8针或两者兼有）</li>
+                            </ol>
+                            <div class="faq-warning">
+                                <p><i class="fas fa-exclamation-triangle"></i> <strong>注意：</strong> 大型显卡可能很重，确保它固定牢固。如有必要，可以考虑使用显卡支架以防止长期下垂。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="install">
+                    <div class="faq-question">
+                        <span>主板前置面板线材如何连接？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-content">
+                            <p>前置面板线材通常包括电源开关、重启按钮、硬盘指示灯、电源指示灯和声音接口等：</p>
+                            <ul>
+                                <li>查阅主板说明书，找到前置面板接口(F_PANEL)的位置和针脚定义</li>
+                                <li>根据针脚定义，将对应的线材连接到正确位置</li>
+                                <li>注意电源开关和重启按钮线材没有正负极之分</li>
+                                <li>LED指示灯接口需要注意正负极，通常正极标记为"+"或"POWER"，负极标记为"-"或"GND"</li>
+                            </ul>
+                            <div class="faq-tip">
+                                <p><i class="fas fa-lightbulb"></i> <strong>提示：</strong> 很多主板会在包装内提供一个前置线材连接器辅助工具，可以先将线材连接到工具上，再整体插入主板，更加便捷。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 开机问题部分 -->
+        <section class="faq-section" id="power-section">
+            <h2 class="faq-title">开机问题</h2>
+            <div class="faq-list">
+                <div class="faq-item" data-category="power">
+                    <div class="faq-question">
+                        <span>电脑无法开机应该如何排查？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-content">
+                            <p>电脑无法开机时的排查步骤：</p>
+                            <ol>
+                                <li><strong>检查电源是否接通：</strong> 确认电源线已插好，电源开关已打开</li>
+                                <li><strong>检查电源按钮连接：</strong> 确认前置面板电源开关线连接正确</li>
+                                <li><strong>检查内部电源连接：</strong> 24针主板供电和CPU 4/8针供电是否插紧</li>
+                                <li><strong>检查内存：</strong> 尝试重新插拔内存，或只用单条内存测试</li>
+                                <li><strong>检查显卡：</strong> 确认显卡安装到位，电源线连接正确</li>
+                                <li><strong>清除CMOS：</strong> 参照主板说明书清除CMOS设置</li>
+                                <li><strong>尝试最小系统：</strong> 只连接CPU、散热器、一条内存和显卡（如有独显）尝试启动</li>
+                            </ol>
+                            <div class="faq-tip">
+                                <p><i class="fas fa-lightbulb"></i> <strong>提示：</strong> 主板上的DEBUG指示灯或蜂鸣器可以帮助诊断问题所在，请查看主板手册了解指示灯含义。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="power">
+                    <div class="faq-question">
+                        <span>开机后无显示如何解决？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-content">
+                            <p>开机后无显示的常见问题和解决方法：</p>
+                            <ul>
+                                <li><strong>检查显示器连接：</strong> 确认显示器电源开启，线缆连接正确</li>
+                                <li><strong>检查显示输出接口：</strong> 使用独立显卡时，显示器应连接到显卡而非主板接口</li>
+                                <li><strong>检查显卡供电：</strong> 确认显卡电源线连接正确</li>
+                                <li><strong>尝试重置显卡：</strong> 重新插拔显卡</li>
+                                <li><strong>检查内存：</strong> 内存未正确安装也可能导致无显示</li>
+                                <li><strong>检查CPU：</strong> 确认CPU安装正确，没有弯曲针脚</li>
+                                <li><strong>尝试使用集成显卡：</strong> 如果CPU有集成显卡，拆下独立显卡，连接到主板接口测试</li>
+                            </ul>
+                            <div class="faq-warning">
+                                <p><i class="fas fa-exclamation-triangle"></i> <strong>注意：</strong> 如果更换了新配件后出现此问题，可能是BIOS版本不兼容。如果您的主板支持BIOS闪回功能，可以尝试更新BIOS。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BIOS设置部分 -->
+        <section class="faq-section" id="bios-section">
+            <h2 class="faq-title">BIOS设置</h2>
+            <div class="faq-list">
+                <div class="faq-item" data-category="bios">
+                    <div class="faq-question">
+                        <span>如何进入BIOS？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-content">
+                            <p>进入BIOS的方法取决于您的主板品牌和型号，通常有以下几种方式：</p>
+                            <ul>
+                                <li><strong>开机时按特定按键：</strong> 在电脑启动时，反复按特定按键可进入BIOS
+                                    <ul>
+                                        <li>常见按键：Del、F2、F10、F12、Esc</li>
+                                        <li>华硕主板通常使用Del或F2</li>
+                                        <li>微星主板通常使用Del</li>
+                                        <li>技嘉主板通常使用Del或F2</li>
+                                        <li>惠普和联想品牌机通常使用F10</li>
+                                    </ul>
+                                </li>
+                                <li><strong>通过Windows高级启动：</strong> 
+                                    <ol>
+                                        <li>在Windows 10/11中，进入设置 → 更新和安全 → 恢复</li>
+                                        <li>在高级启动中选择"立即重启"</li>
+                                        <li>在高级选项中选择"UEFI固件设置"</li>
+                                    </ol>
+                                </li>
+                            </ul>
+                            <div class="faq-tip">
+                                <p><i class="fas fa-lightbulb"></i> <strong>提示：</strong> 开机画面通常会显示进入BIOS的按键提示。如果画面一闪而过，可以在开机时多次按Esc键暂停启动画面。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="bios">
+                    <div class="faq-question">
+                        <span>如何启用XMP/DOCP提升内存性能？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-content">
+                            <p>XMP(英特尔)/DOCP(AMD)是内存超频配置文件，可以让内存运行在额定速度：</p>
+                            <ol>
+                                <li>进入BIOS设置界面</li>
+                                <li>查找内存相关设置项:
+                                    <ul>
+                                        <li>Intel主板通常称为"XMP"或"Extreme Memory Profile"</li>
+                                        <li>AMD主板通常称为"DOCP"、"AMP"或"内存超频"</li>
+                                    </ul>
+                                </li>
+                                <li>将XMP/DOCP设置从"Disabled"改为"Enabled"或"Profile 1"</li>
+                                <li>保存设置并重启（通常按F10然后确认）</li>
+                            </ol>
+                            <p>启用后，可以在Windows中使用CPU-Z软件查看内存频率是否已提升到正确水平。</p>
+                            <div class="faq-warning">
+                                <p><i class="fas fa-exclamation-triangle"></i> <strong>注意：</strong> 虽然XMP/DOCP通常很稳定，但在某些系统上可能导致不稳定。如果启用后系统不稳定，请进入BIOS恢复默认设置。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="cta">
+        <div class="container">
+            <h2>还有其他问题？</h2>
+            <p>如果您在装机过程中遇到本页面未涵盖的问题，欢迎联系我们获取专业支持。</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn" id="contactUsBtn">联系我们 <i class="fas fa-envelope"></i></a>
+                <a href="components.html" class="btn btn-alt">了解更多配件知识 <i class="fas fa-microchip"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>装机-爽</h2>
+                    <p>小白装机指南，让装机变得简单</p>
+                </div>
+                <div class="footer-links">
+                    <h3>快速导航</h3>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="components.html">电脑配件</a></li>
+                        <li><a href="assembly.html">装机教程</a></li>
+                        <li><a href="recommendations.html">配置推荐</a></li>
+                        <li><a href="troubleshooting.html">常见问题</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 装机-爽 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 问题展开/收起功能
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    // 关闭其他打开的问题
+                    const currentlyActive = document.querySelector('.faq-question.active');
+                    const currentlyShown = document.querySelector('.faq-answer.show');
+                    
+                    if (currentlyActive && currentlyActive !== question) {
+                        currentlyActive.classList.remove('active');
+                        currentlyShown.classList.remove('show');
+                    }
+                    
+                    // 切换当前问题状态
+                    question.classList.toggle('active');
+                    const answer = question.nextElementSibling;
+                    answer.classList.toggle('show');
+                });
+            });
+            
+            // 分类筛选功能
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // 更新按钮状态
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    // 筛选问题
+                    const category = btn.getAttribute('data-category');
+                    
+                    faqItems.forEach(item => {
+                        if (category === 'all' || item.getAttribute('data-category') === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // 搜索功能
+            const searchInput = document.getElementById('faq-search-input');
+            const searchButton = document.getElementById('faq-search-button');
+            
+            function performSearch() {
+                const searchTerm = searchInput.value.toLowerCase();
+                
+                if (searchTerm.trim() === '') {
+                    // 如果搜索词为空，显示所有问题
+                    faqItems.forEach(item => {
+                        item.style.display = 'block';
+                    });
+                    return;
+                }
+                
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+                    const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                    
+                    if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // 重置分类按钮状态
+                categoryBtns.forEach(btn => btn.classList.remove('active'));
+                document.querySelector('[data-category="all"]').classList.add('active');
+            }
+            
+            searchButton.addEventListener('click', performSearch);
+            
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主板安装详解 | 装机-爽</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .article-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .article-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .article-header .meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .article-content h3 {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--dark);
+        }
+        
+        .article-content p {
+            margin-bottom: 1.2rem;
+            line-height: 1.7;
+        }
+        
+        .article-content img {
+            width: 100%;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-box {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning-box {
+            background-color: rgba(243, 156, 18, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .danger-box {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--danger);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .info-box h4, .warning-box h4, .danger-box h4 {
+            margin-top: 0;
+        }
+        
+        .info-box h4 {
+            color: var(--primary);
+        }
+        
+        .warning-box h4 {
+            color: var(--warning);
+        }
+        
+        .danger-box h4 {
+            color: var(--danger);
+        }
+        
+        .info-box p:last-child, .warning-box p:last-child, .danger-box p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .step-box {
+            display: flex;
+            margin-bottom: 3rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-number {
+            flex: 0 0 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .step-content {
+            flex: 1;
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+        }
+        
+        .step-content h4 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .step-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .video-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio (9/16 = 0.5625) */
+            margin: 2rem 0;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        .tools-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .tool-item {
+            flex: 1 1 200px;
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .tool-item i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .tool-item h5 {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+        
+        .tool-item p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>装机-爽</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="components.html"><i class="fas fa-microchip"></i> 电脑配件</a></li>
+                <li><a href="assembly.html"><i class="fas fa-tools"></i> 装机教程</a></li>
+                <li><a href="recommendations.html"><i class="fas fa-list-alt"></i> 配置推荐</a></li>
+                <li><a href="troubleshooting.html"><i class="fas fa-wrench"></i> 常见问题</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="article-header">
+        <div class="container">
+            <h2>主板安装详解</h2>
+            <div class="meta">
+                <span><i class="fas fa-clock"></i> 阅读时间：15分钟</span>
+                <span><i class="fas fa-calendar-alt"></i> 更新日期：2023-10-12</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="article-content">
+            <p>主板是电脑的"神经中枢"，连接和控制着所有硬件组件。正确安装主板是整个装机过程中最关键的步骤之一。本教程将详细介绍如何将主板安装到机箱中，包括准备工作、步骤说明以及常见的注意事项。</p>
+            
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/v7MYOpFONCU" title="主板安装视频教程" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            
+            <div class="disclaimer" style="text-align: center; font-size: 0.9rem; color: #666; margin-bottom: 2rem;">
+                <p>视频来源：YouTube - 版权归原作者所有。此视频仅作教学参考，如有侵权请联系我们删除。</p>
+            </div>
+            
+            <h3>准备工作</h3>
+            <p>在开始安装主板之前，您需要准备以下工具和材料：</p>
+            
+            <div class="tools-list">
+                <div class="tool-item">
+                    <i class="fas fa-screwdriver"></i>
+                    <h5>十字螺丝刀</h5>
+                    <p>用于安装主板螺丝</p>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-bolt"></i>
+                    <h5>主板螺丝</h5>
+                    <p>通常随机箱附带</p>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-ring"></i>
+                    <h5>铜柱（撑脚）</h5>
+                    <p>支撑主板并绝缘</p>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-hand-sparkles"></i>
+                    <h5>防静电手环</h5>
+                    <p>防止静电损坏</p>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <h4>防静电措施</h4>
+                <p>主板对静电特别敏感，安装过程中应佩戴防静电手环或定期触摸金属物体（如电源外壳）释放静电。避免在地毯上工作，工作台上最好铺设防静电垫。</p>
+            </div>
+            
+            <h3>前期准备</h3>
+            <p>在将主板安装到机箱之前，建议先进行一些准备工作：</p>
+            <ol>
+                <li><strong>阅读说明书</strong>：仔细阅读主板和机箱的说明书，了解特定的安装要求。</li>
+                <li><strong>确认兼容性</strong>：确保您的主板尺寸（ATX、mATX、ITX等）与机箱兼容。</li>
+                <li><strong>预先安装某些部件</strong>：如CPU、CPU散热器和内存条通常在主板装入机箱前就先行安装好。</li>
+                <li><strong>确认后I/O挡板</strong>：找出主板附带的后I/O挡板，这是安装在机箱后部的金属板，有各种接口的开口。</li>
+            </ol>
+            
+            <div class="info-box">
+                <h4>主板尺寸与支架位置</h4>
+                <p>不同尺寸的主板需要不同位置的支架。常见的ATX主板通常有9个螺丝孔，而mATX和ITX分别有6-7个和4个。确保每个主板螺丝孔下方都有支架，且没有多余的支架可能会接触到主板底部的电路。</p>
+            </div>
+            
+            <h3>主板安装步骤</h3>
+            
+            <div class="step-box">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>安装后I/O挡板</h4>
+                    <p>首先将主板配套的I/O挡板安装在机箱后部相应的位置。这块金属板有各种形状的开口，对应主板背部的各种接口。</p>
+                    <p>安装时，将挡板从机箱内侧推向外侧，直到听到卡入到位的声音。确保方向正确，挡板上的小金属弹片应该朝向机箱内部。</p>
+                    <div class="warning-box">
+                        <h4>注意</h4>
+                        <p>I/O挡板安装后很难移除，请确保正确方向再安装。如果方向错误，可能需要从机箱外侧轻推内侧缘来取下重装。</p>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1587202372616-b43abea06c2a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="I/O挡板安装">
+                </div>
+            </div>
+            
+            <div class="step-box">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>检查并安装支架</h4>
+                    <p>检查机箱内主板安装区域，确认铜柱（支架）的位置是否与主板上的螺丝孔一致。大多数现代机箱已经预装了一些支架，但您可能需要根据主板尺寸增加或移除一些支架。</p>
+                    <p>使用螺丝刀或支架安装工具（有些机箱附带），将铜柱拧入机箱主板托板上的对应孔位。不要用力过猛，以免破坏螺纹。</p>
+                    <div class="danger-box">
+                        <h4>危险</h4>
+                        <p>确保只在主板螺丝孔的对应位置安装支架，多余的支架可能会接触到主板底面的电路，造成短路损坏。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step-box">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>主板定位和对齐</h4>
+                    <p>小心地将主板抬起（握住散热器或边缘，避免触碰底面的电子元件），将其放入机箱，使主板背部的I/O接口对准之前安装的I/O挡板的开口。</p>
+                    <p>轻轻推动主板，使其就位，确保所有支架都与主板上的安装孔对齐。主板应该平稳地放置在支架上，不应该有晃动或倾斜。</p>
+                </div>
+            </div>
+            
+            <div class="step-box">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>安装主板螺丝</h4>
+                    <p>当主板正确放置后，开始安装螺丝将主板固定在支架上。通常建议先安装靠近中央的螺丝，再安装边缘的螺丝，这样可以防止主板偏移。</p>
+                    <p>使用十字螺丝刀轻轻拧紧螺丝，直到螺丝头与主板平齐且无法轻易转动。注意不要拧得过紧，以免损坏主板PCB板。</p>
+                    <div class="warning-box">
+                        <h4>适当力度</h4>
+                        <p>拧紧螺丝时，力度要适中，不要过紧也不要过松。过紧可能会损坏主板，过松则可能导致主板不稳定，影响使用寿命和散热效果。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step-box">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h4>检查I/O挡板对齐</h4>
+                    <p>安装主板后，检查后部I/O接口是否正确穿过I/O挡板的开口。确保没有金属弹片阻挡了接口，所有接口都应当暴露在机箱外部且不被挡板阻挡。</p>
+                    <p>如果发现I/O挡板的金属弹片挤入接口内部，可以用塑料工具轻轻调整弹片位置。这些弹片的作用是提供接地和电磁屏蔽，应该贴在接口周围而非挤入接口内部。</p>
+                </div>
+            </div>
+            
+            <div class="step-box">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                    <h4>最终检查</h4>
+                    <p>完成主板安装后，进行最终检查：</p>
+                    <ul>
+                        <li>确认所有螺丝均已安装并适当拧紧</li>
+                        <li>主板平稳地坐在支架上，没有明显的弯曲或翘起</li>
+                        <li>I/O接口与挡板开口对齐良好</li>
+                        <li>确认没有工具或螺丝遗留在主板下方或机箱内部</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3>后续连接</h3>
+            <p>成功安装主板后，下一步是连接各种电缆和组件：</p>
+            <ol>
+                <li><strong>前面板接口</strong>：连接电源按钮、重置按钮、电源LED、硬盘LED等前面板线缆到主板对应接口</li>
+                <li><strong>机箱风扇</strong>：将机箱风扇的电源线连接到主板上的风扇接口</li>
+                <li><strong>电源连接</strong>：连接ATX 24针主电源和CPU 4/8针辅助电源</li>
+                <li><strong>存储设备</strong>：连接SATA或其他存储设备的数据和电源线</li>
+                <li><strong>扩展卡</strong>：安装显卡、声卡、网卡等PCIe扩展卡</li>
+            </ol>
+            
+            <div class="info-box">
+                <h4>主板手册是宝藏</h4>
+                <p>不同主板的接口布局和连接方式可能不同，连接前请务必参考主板说明书，确认正确的针脚和接口位置，尤其是前面板接口，方向错误可能导致功能无法使用。</p>
+            </div>
+            
+            <h3>常见问题与解决方法</h3>
+            
+            <h4>1. 安装后发现漏装了I/O挡板</h4>
+            <p>遗憾的是，如果您完成主板安装后才发现忘记安装I/O挡板，通常需要将主板完全移除然后重新安装。因此在安装主板前检查I/O挡板非常重要。</p>
+            
+            <h4>2. 主板与支架孔位不对齐</h4>
+            <p>这可能是因为主板尺寸与您机箱支持的尺寸不匹配，或者支架安装位置不正确。确认主板规格（ATX、mATX等）与机箱兼容，并检查支架位置是否正确。</p>
+            
+            <h4>3. 安装后发现主板受力不均或弯曲</h4>
+            <p>这通常是因为支架数量不足或位置不正确导致的。应立即松开螺丝，检查支架位置，必要时重新配置支架再安装主板。主板弯曲可能导致电路板损坏。</p>
+            
+            <h4>4. 前面板接口连接困难</h4>
+            <p>前面板接口的小型连接器可能难以精确连接。使用主板说明书确认正确位置，可以借助镊子或小型尖嘴钳辅助连接。许多主板制造商现在提供前面板连接器适配器，可以先将小型连接器插入适配器，再一次性连接到主板。</p>
+            
+            <h3>总结</h3>
+            <p>主板安装是电脑组装中的关键步骤，虽然看起来简单，但需要细心和耐心。正确安装主板为后续组件的安装奠定了基础，影响着整机的稳定性和使用寿命。记住，花时间仔细阅读说明书，遵循正确步骤，并保持工作区域干净整洁，会让安装过程更加顺利。</p>
+            
+            <p>如果您对主板有更多疑问，可以查看我们的<a href="components.html#motherboard">主板详解</a>页面，或者前往<a href="assembly.html">完整装机教程</a>了解电脑组装的其他步骤。</p>
+        </div>
+    </div>
+
+    <section class="cta">
+        <div class="container">
+            <h2>需要更多装机指南？</h2>
+            <p>探索我们的其他硬件指南和教程，助您轻松完成电脑装机</p>
+            <div class="cta-buttons">
+                <a href="components.html" class="btn">浏览所有硬件 <i class="fas fa-microchip"></i></a>
+                <a href="assembly.html" class="btn btn-alt">装机教程 <i class="fas fa-tools"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>装机-爽</h2>
+                    <p>小白装机指南，让装机变得简单</p>
+                </div>
+                <div class="footer-links">
+                    <h3>快速导航</h3>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="components.html">电脑配件</a></li>
+                        <li><a href="assembly.html">装机教程</a></li>
+                        <li><a href="recommendations.html">配置推荐</a></li>
+                        <li><a href="troubleshooting.html">常见问题</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 装机-爽 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

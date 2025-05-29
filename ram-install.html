@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内存条安装教程 | 装机-爽</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .article-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1562976540-1502c2145186?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .article-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .article-header .meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .article-content h3 {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--dark);
+        }
+        
+        .article-content p {
+            margin-bottom: 1.2rem;
+            line-height: 1.7;
+        }
+        
+        .article-content img {
+            width: 100%;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-box {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning-box {
+            background-color: rgba(243, 156, 18, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .info-box h4, .warning-box h4 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        .warning-box h4 {
+            color: var(--warning);
+        }
+        
+        .info-box p:last-child, .warning-box p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .step-box {
+            display: flex;
+            margin-bottom: 3rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-number {
+            flex: 0 0 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .step-content {
+            flex: 1;
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+        }
+        
+        .step-content h4 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .step-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .video-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio (9/16 = 0.5625) */
+            margin: 2rem 0;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>装机-爽</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="components.html"><i class="fas fa-microchip"></i> 电脑配件</a></li>
+                <li><a href="assembly.html"><i class="fas fa-tools"></i> 装机教程</a></li>
+                <li><a href="recommendations.html"><i class="fas fa-list-alt"></i> 配置推荐</a></li>
+                <li><a href="troubleshooting.html"><i class="fas fa-wrench"></i> 常见问题</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="article-header">
+        <div class="container">
+            <h2>内存条安装教程</h2>
+            <div class="meta">
+                <span><i class="fas fa-clock"></i> 阅读时间：5分钟</span>
+                <span><i class="fas fa-calendar-alt"></i> 更新日期：2023-09-05</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="article-content">
+            <p>内存(RAM)是计算机中的临时存储区域，用于存储CPU当前正在处理的数据。正确安装内存条是装机过程中的关键步骤之一，也是最简单的步骤之一。本教程将一步一步指导您如何正确安装内存条，即使您是完全的小白也能轻松完成。</p>
+            
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/XeEFQ1Gp3VE" title="内存条安装视频教程" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            
+            <div class="disclaimer" style="text-align: center; font-size: 0.9rem; color: #666; margin-bottom: 2rem;">
+                <p>视频来源：YouTube - 版权归原作者所有。此视频仅作教学参考，如有侵权请联系我们删除。</p>
+            </div>
+            
+            <h3>准备工作</h3>
+            <p>在开始安装内存条之前，您需要准备以下物品：</p>
+            <ul>
+                <li>内存条（确保与您的主板兼容）</li>
+                <li>电脑主板（已安装在机箱中或在工作台上）</li>
+                <li>防静电手环（建议使用，但不是必须的）</li>
+            </ul>
+            
+            <div class="warning-box">
+                <h4>注意事项</h4>
+                <p>在安装内存条前，确保已关闭电脑电源并拔掉电源线，以避免可能的电击和硬件损坏。同时，尽量确保自己已释放静电（可以触摸金属物体或使用防静电手环），避免静电损坏电脑组件。</p>
+            </div>
+            
+            <h3>内存安装步骤</h3>
+            
+            <div class="step-box">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>找到内存插槽</h4>
+                    <p>首先，您需要在主板上找到内存插槽（DIMM插槽）。这些插槽通常位于主板上的CPU插槽附近，它们是长形的，两端有卡扣。现代主板通常有2-4个内存插槽，可能是黑色、灰色或其他颜色。</p>
+                    <p>注意：许多主板使用不同颜色标记内存插槽，以表示其通道。例如，蓝色和黑色交替的插槽表示双通道配置。</p>
+                    <img src="https://images.unsplash.com/photo-1587202372616-b43abea06c2a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="主板内存插槽">
+                </div>
+            </div>
+            
+            <div class="step-box">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>打开内存插槽卡扣</h4>
+                    <p>在内存插槽的两端，您会看到可以移动的塑料卡扣。将这些卡扣向两侧压下并打开，为内存条安装做好准备。</p>
+                    <p>一些主板上，可能只需要打开内存插槽两端的卡扣，而另一些主板可能只有卡扣在插槽的两端。无论哪种情况，原理都是一样的。</p>
+                </div>
+            </div>
+            
+            <div class="step-box">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>对准内存条</h4>
+                    <p>观察您的内存条，您会发现它底部的金色触点中间有一个缺口。这个缺口设计用于确保内存条只能以正确的方向插入。</p>
+                    <p>将内存条对准插槽，使内存条上的缺口与插槽中的凸起对齐。这样可以确保您不会以错误的方向插入内存条。</p>
+                    <img src="https://images.unsplash.com/photo-1595429085143-9ead64d811e3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="内存条缺口与插槽对齐">
+                </div>
+            </div>
+            
+            <div class="step-box">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>插入内存条</h4>
+                    <p>确保内存条正确对齐后，用双手握住内存条的两端（避免触碰金色触点），垂直对准内存插槽。</p>
+                    <p>然后，用适当的力度均匀地向下压，直到您听到"咔嗒"一声，表示卡扣已自动闭合，锁定内存条。</p>
+                    <p>如果卡扣没有自动闭合，您可能需要手动将其向上推，确保它们正确锁定内存条。</p>
+                </div>
+            </div>
+            
+            <div class="step-box">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h4>确认安装正确</h4>
+                    <p>安装完成后，检查内存条是否平稳地坐在插槽中，两端的卡扣是否完全闭合。正确安装的内存条应该是水平的，与主板平行，不会有倾斜或摇晃。</p>
+                    <p>同时，检查内存条顶部是否与插槽顶部齐平，金色触点是否完全插入插槽中（通常只有一小部分金色触点可见或完全不可见）。</p>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h4>双通道内存配置</h4>
+                <p>如果您安装两条或四条内存，建议采用双通道或四通道配置以获得最佳性能。通常，这意味着将内存条放入相同颜色的插槽或特定的插槽组合中（例如，在四个插槽的主板上，使用1号和3号插槽或2号和4号插槽）。</p>
+                <p>请查阅您主板的说明书，了解正确的内存安装顺序，以实现双通道或四通道操作。</p>
+            </div>
+            
+            <h3>内存安装后的故障排除</h3>
+            <p>如果安装内存后电脑无法启动或无法识别新安装的内存，可尝试以下解决方法：</p>
+            <ol>
+                <li><strong>重新安装</strong>：取出内存条并重新安装，确保它们完全插入并锁定</li>
+                <li><strong>清洁内存触点</strong>：用橡皮擦轻轻擦拭金色触点，去除可能的灰尘或氧化层</li>
+                <li><strong>尝试不同插槽</strong>：将内存条移动到不同的插槽中，检查是否是插槽问题</li>
+                <li><strong>单条测试</strong>：如果安装了多条内存，尝试一次只安装一条，确认每条内存都能正常工作</li>
+                <li><strong>检查兼容性</strong>：确认内存与主板兼容（频率、容量和类型）</li>
+                <li><strong>更新BIOS</strong>：某些情况下，可能需要更新主板BIOS以支持新的内存类型</li>
+            </ol>
+            
+            <div class="warning-box">
+                <h4>过度用力风险</h4>
+                <p>安装内存时需要一定的力度，但不要过度用力。过度用力可能会损坏内存插槽或内存条本身。如果感觉阻力过大，请停止并重新检查对齐情况。</p>
+            </div>
+            
+            <h3>总结</h3>
+            <p>内存安装是装机过程中最简单的步骤之一，只需要几分钟就能完成。正确安装内存可以确保您的电脑稳定运行，并发挥出最佳性能。如果您有多条内存，记得参考主板手册来确定正确的插槽组合，以启用双通道或四通道模式，进一步提升系统性能。</p>
+            
+            <p>如果您对内存有更多疑问，可以查看我们的<a href="components.html#ram">内存详解</a>页面，或者前往<a href="assembly.html">完整装机教程</a>了解电脑组装的其他步骤。</p>
+        </div>
+    </div>
+
+    <section class="cta">
+        <div class="container">
+            <h2>需要更多装机指南？</h2>
+            <p>探索我们的其他硬件指南和教程，助您轻松完成电脑装机</p>
+            <div class="cta-buttons">
+                <a href="components.html" class="btn">浏览所有硬件 <i class="fas fa-microchip"></i></a>
+                <a href="assembly.html" class="btn btn-alt">装机教程 <i class="fas fa-tools"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>装机-爽</h2>
+                    <p>小白装机指南，让装机变得简单</p>
+                </div>
+                <div class="footer-links">
+                    <h3>快速导航</h3>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="components.html">电脑配件</a></li>
+                        <li><a href="assembly.html">装机教程</a></li>
+                        <li><a href="recommendations.html">配置推荐</a></li>
+                        <li><a href="troubleshooting.html">常见问题</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 装机-爽 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

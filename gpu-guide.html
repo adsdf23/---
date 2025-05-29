@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏显卡选购指南 | 装机-爽</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .article-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1591405351990-4726e331f141?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .article-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .article-header .meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .article-content h3 {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--dark);
+        }
+        
+        .article-content p {
+            margin-bottom: 1.2rem;
+            line-height: 1.7;
+        }
+        
+        .article-content img {
+            width: 100%;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-box {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning-box {
+            background-color: rgba(243, 156, 18, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .info-box h4, .warning-box h4 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        .warning-box h4 {
+            color: var(--warning);
+        }
+        
+        .info-box p:last-child, .warning-box p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+        
+        .comparison-table th, .comparison-table td {
+            padding: 0.75rem;
+            border: 1px solid #e0e0e0;
+            text-align: left;
+        }
+        
+        .comparison-table th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .gpu-tier {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .gpu-tier h4 {
+            color: var(--primary);
+            margin-top: 0;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>装机-爽</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="components.html"><i class="fas fa-microchip"></i> 电脑配件</a></li>
+                <li><a href="assembly.html"><i class="fas fa-tools"></i> 装机教程</a></li>
+                <li><a href="recommendations.html"><i class="fas fa-list-alt"></i> 配置推荐</a></li>
+                <li><a href="troubleshooting.html"><i class="fas fa-wrench"></i> 常见问题</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="article-header">
+        <div class="container">
+            <h2>游戏显卡选购指南</h2>
+            <div class="meta">
+                <span><i class="fas fa-clock"></i> 阅读时间：12分钟</span>
+                <span><i class="fas fa-calendar-alt"></i> 更新日期：2023-08-20</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="article-content">
+            <p>对于游戏玩家来说，显卡是电脑中最为重要的组件之一，直接决定了游戏的画面质量和流畅度。市场上琳琅满目的显卡型号和各种专业术语，常常让初次购买的玩家感到困惑。本指南将帮助您了解显卡的关键参数，并根据不同的游戏需求和预算选择最适合的游戏显卡。</p>
+            
+            <h3>理解显卡的关键参数</h3>
+            <p>选择显卡前，了解以下关键参数将有助于您做出明智的决定：</p>
+            <ul>
+                <li><strong>显存容量</strong>：显卡的专用内存，通常为4GB、8GB、12GB、16GB等，影响处理高分辨率纹理和高设置游戏的能力</li>
+                <li><strong>显存类型</strong>：如GDDR6、GDDR6X等，更先进的显存类型提供更高的带宽</li>
+                <li><strong>核心频率</strong>：显卡GPU核心的工作频率，通常以MHz为单位，影响整体性能</li>
+                <li><strong>流处理器数量</strong>：执行并行计算的单元数量，数量越多通常性能越强</li>
+                <li><strong>光线追踪能力</strong>：支持实时光线追踪的硬件单元，提供更逼真的光影效果</li>
+                <li><strong>DLSS/FSR支持</strong>：AI超分辨率技术，可在不降低画面质量的情况下提升帧率</li>
+                <li><strong>TDP</strong>：热设计功耗，表示显卡的功耗水平，影响电源选择和散热需求</li>
+            </ul>
+            
+            <div class="info-box">
+                <h4>显存并非越大越好</h4>
+                <p>虽然显存容量很重要，但并不是唯一的关键因素。例如，一张有12GB显存的中端卡可能不如一张有8GB显存的高端卡性能好。显存类型、GPU架构和核心性能同样重要。</p>
+            </div>
+            
+            <h3>NVIDIA vs AMD：两大厂商对比</h3>
+            <p>目前游戏显卡市场主要由NVIDIA和AMD两家厂商主导，各有优势：</p>
+            
+            <table class="comparison-table">
+                <tr>
+                    <th>特性</th>
+                    <th>NVIDIA</th>
+                    <th>AMD</th>
+                </tr>
+                <tr>
+                    <td>光线追踪性能</td>
+                    <td>更成熟，RTX系列拥有专用RT核心</td>
+                    <td>有所支持，但通常不如同级NVIDIA产品</td>
+                </tr>
+                <tr>
+                    <td>AI超分辨率</td>
+                    <td>DLSS技术，效果较好但仅支持RTX显卡</td>
+                    <td>FSR技术，兼容性更广但效果稍逊</td>
+                </tr>
+                <tr>
+                    <td>驱动支持</td>
+                    <td>驱动稳定性好，游戏优化及时</td>
+                    <td>近年有明显改善，但部分游戏优化滞后</td>
+                </tr>
+                <tr>
+                    <td>价格/性能比</td>
+                    <td>高端性能强，但价格较高</td>
+                    <td>通常提供更好的性价比，尤其是中低端产品</td>
+                </tr>
+                <tr>
+                    <td>功耗效率</td>
+                    <td>通常效率更高，尤其是最新一代产品</td>
+                    <td>高端型号功耗较高，但中低端型号效率不错</td>
+                </tr>
+            </table>
+            
+            <p>总体来说，如果您重视光线追踪和DLSS等先进特性，NVIDIA的RTX系列是更好的选择；如果您追求高性价比且对光线追踪要求不高，AMD的产品可能更具吸引力。</p>
+            
+            <img src="https://images.unsplash.com/photo-1587202372616-b43abea06c2a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="高端游戏显卡">
+            
+            <h3>根据游戏分辨率选择显卡</h3>
+            <p>不同的游戏分辨率对显卡性能的要求差异很大，选择显卡时应考虑您的主要游戏分辨率：</p>
+            
+            <div class="gpu-tier">
+                <h4>1080p分辨率(Full HD)</h4>
+                <p>适合预算有限的玩家，大多数显卡都能在该分辨率下提供良好体验。</p>
+                <ul>
+                    <li><strong>入门级(低特效)</strong>：GTX 1650 / RX 6500 XT</li>
+                    <li><strong>中端(高特效)</strong>：RTX 3060 / RX 6600 XT</li>
+                    <li><strong>高端(最高特效+光追)</strong>：RTX 3060 Ti / RTX 4060 / RX 6700 XT</li>
+                </ul>
+            </div>
+            
+            <div class="gpu-tier">
+                <h4>1440p分辨率(2K)</h4>
+                <p>平衡画面细节和性能的最佳选择，目前最受欢迎的游戏分辨率。</p>
+                <ul>
+                    <li><strong>入门级(中特效)</strong>：RTX 3060 Ti / RX 6700 XT</li>
+                    <li><strong>中端(高特效)</strong>：RTX 3070 / RTX 4070 / RX 6800</li>
+                    <li><strong>高端(最高特效+光追)</strong>：RTX 3080 / RTX 4070 Ti / RX 7900 XT</li>
+                </ul>
+            </div>
+            
+            <div class="gpu-tier">
+                <h4>4K分辨率(Ultra HD)</h4>
+                <p>要求最高性能显卡，提供最精细的画面细节，但价格昂贵。</p>
+                <ul>
+                    <li><strong>入门级(中特效)</strong>：RTX 3080 / RX 6800 XT</li>
+                    <li><strong>中端(高特效)</strong>：RTX 3090 / RTX 4080 / RX 7900 XT</li>
+                    <li><strong>高端(最高特效+光追)</strong>：RTX 4090 / RX 7900 XTX</li>
+                </ul>
+            </div>
+            
+            <div class="warning-box">
+                <h4>注意</h4>
+                <p>光线追踪和高刷新率游戏会大幅增加对显卡性能的需求。如果您追求这些特性，建议选择比常规需求高一档的显卡。</p>
+            </div>
+            
+            <h3>显卡与其他硬件的配合</h3>
+            <p>选择显卡时，还需考虑与其他硬件的匹配，避免出现性能瓶颈：</p>
+            
+            <ol>
+                <li><strong>CPU匹配</strong>：强大的显卡需要搭配相应性能的CPU，否则可能出现CPU瓶颈，浪费显卡性能</li>
+                <li><strong>电源需求</strong>：高端显卡对电源有较高要求，例如RTX 4090建议使用850W以上优质电源</li>
+                <li><strong>散热考量</strong>：高性能显卡产生大量热量，需要确保机箱有良好的散热设计</li>
+                <li><strong>机箱空间</strong>：高端显卡通常体积较大，购买前需确认机箱是否有足够空间</li>
+                <li><strong>PCIe接口</strong>：确保主板有足够的PCIe带宽，高端显卡建议PCIe 4.0及以上</li>
+            </ol>
+            
+            <div class="info-box">
+                <h4>推荐CPU与显卡组合</h4>
+                <ul>
+                    <li>入门级显卡(GTX 1650/RX 6500 XT)：Intel i3/i5 或 AMD Ryzen 3/5</li>
+                    <li>中端显卡(RTX 3060/RX 6700 XT)：Intel i5/i7 或 AMD Ryzen 5/7</li>
+                    <li>高端显卡(RTX 4070及以上/RX 7900系列)：Intel i7/i9 或 AMD Ryzen 7/9</li>
+                </ul>
+            </div>
+            
+            <h3>预算与性价比考量</h3>
+            <p>根据不同预算区间，以下是目前（2023年）性价比较高的显卡选择：</p>
+            
+            <ul>
+                <li><strong>1500元以下</strong>：GTX 1650 SUPER / RX 6500 XT，适合入门级1080p游戏</li>
+                <li><strong>1500-3000元</strong>：RTX 3060 / RX 6600 XT，满足大多数1080p高特效游戏需求</li>
+                <li><strong>3000-5000元</strong>：RTX 4060 Ti / RX 6750 XT，良好1440p游戏体验</li>
+                <li><strong>5000-8000元</strong>：RTX 4070 / RX 7800 XT，优秀1440p和入门级4K体验</li>
+                <li><strong>8000元以上</strong>：RTX 4080 / RTX 4090 / RX 7900 XTX，顶级4K游戏体验</li>
+            </ul>
+            
+            <p>显卡市场价格波动较大，建议在购买前查看最新价格。</p>
+            
+            <div class="info-box">
+                <h4>购买提示</h4>
+                <p>显卡性能梯队通常遵循"上一代高端 ≈ 下一代中端"的规律。例如RTX 3080性能约等于RTX 4070。如果预算有限，考虑购买上一代高端显卡可能是更具性价比的选择。</p>
+            </div>
+            
+            <h3>不同品牌的显卡有何区别</h3>
+            <p>同一型号的显卡(如RTX 4070)有多家厂商生产，如华硕、微星、技嘉等，它们主要在以下方面有所区别：</p>
+            <ul>
+                <li><strong>散热设计</strong>：不同品牌采用不同的散热器设计，影响温度和噪音</li>
+                <li><strong>工作频率</strong>：部分品牌提供出厂超频，性能略高于公版</li>
+                <li><strong>外观设计</strong>：包括尺寸、RGB灯效、金属背板等</li>
+                <li><strong>售后服务</strong>：保修政策和服务网点的差异</li>
+                <li><strong>附加软件</strong>：各厂商提供的超频工具和灯效控制软件</li>
+            </ul>
+            
+            <p>选择品牌时，建议考虑散热性能、噪音控制和售后服务，而非仅看外观。对于高端显卡，优质的散热设计尤为重要。</p>
+            
+            <h3>显卡选购中的常见误区</h3>
+            <ol>
+                <li><strong>盲目追求高端</strong>：过度配置不一定带来对应的体验提升，应根据显示器分辨率和游戏需求选择适合的显卡</li>
+                <li><strong>忽视TDP与电源</strong>：高性能显卡需要匹配足够功率的优质电源</li>
+                <li><strong>只看显存大小</strong>：显存容量只是众多参数之一，同样重要的还有GPU架构、核心数量和频率</li>
+                <li><strong>忽视散热</strong>：性能强大的显卡需要良好的散热环境，尤其是小型机箱中</li>
+                <li><strong>忽视未来游戏需求</strong>：如果打算长期使用，应适当考虑未来2-3年的游戏要求</li>
+            </ol>
+            
+            <h3>总结</h3>
+            <p>选择游戏显卡是一个需要综合考虑多方面因素的决策，包括您的游戏需求、显示器分辨率、预算限制以及与其他硬件的兼容性。希望本指南能帮助您在众多选择中找到最适合自己的游戏显卡。记住，最贵的不一定是最适合您的，最适合您需求和预算的才是最好的选择。</p>
+            
+            <p>如果您对显卡有更多疑问，可以查看我们的<a href="components.html#gpu">显卡详解</a>页面，或者前往<a href="recommendations.html">配置推荐</a>查看我们推荐的完整电脑配置。</p>
+        </div>
+    </div>
+
+    <section class="cta">
+        <div class="container">
+            <h2>需要更多装机指南？</h2>
+            <p>探索我们的其他硬件指南和教程，助您轻松完成电脑装机</p>
+            <div class="cta-buttons">
+                <a href="components.html" class="btn">浏览所有硬件 <i class="fas fa-microchip"></i></a>
+                <a href="assembly.html" class="btn btn-alt">装机教程 <i class="fas fa-tools"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>装机-爽</h2>
+                    <p>小白装机指南，让装机变得简单</p>
+                </div>
+                <div class="footer-links">
+                    <h3>快速导航</h3>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="components.html">电脑配件</a></li>
+                        <li><a href="assembly.html">装机教程</a></li>
+                        <li><a href="recommendations.html">配置推荐</a></li>
+                        <li><a href="troubleshooting.html">常见问题</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 装机-爽 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

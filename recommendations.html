@@ -1,0 +1,2260 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配置推荐 | 装机-爽</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1587202372686-9e5b6a7f7e59?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .page-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .page-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .config-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .config-filter button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #f5f5f5;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .config-filter button.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .config-filter button:hover:not(.active) {
+            background-color: #e0e0e0;
+        }
+        
+        .config-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .config-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.5rem;
+            position: relative;
+        }
+        
+        .config-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .price-tag {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .config-body {
+            padding: 1.5rem;
+        }
+        
+        .config-specs {
+            margin-bottom: 1.5rem;
+            display: none; /* 默认隐藏配置清单 */
+        }
+        
+        .config-specs.active {
+            display: block; /* 显示配置清单 */
+        }
+        
+        .config-specs h4 {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
+        
+        .spec-item {
+            display: flex;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+        
+        .spec-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(52, 152, 219, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .spec-detail {
+            flex-grow: 1;
+        }
+        
+        .spec-name {
+            font-weight: bold;
+            margin-bottom: 0.2rem;
+        }
+        
+        .spec-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .config-footer {
+            padding: 1.5rem;
+            background-color: #f9f9f9;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .config-rating {
+            display: flex;
+            align-items: center;
+        }
+        
+        .rating-stars {
+            color: var(--warning);
+            margin-right: 0.5rem;
+        }
+        
+        .rating-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .config-tag {
+            font-size: 0.85rem;
+            padding: 4px 12px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+        
+        .tag-gaming {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: #e74c3c;
+        }
+        
+        .tag-office {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: #2ecc71;
+        }
+        
+        .tag-design {
+            background-color: rgba(155, 89, 182, 0.1);
+            color: #9b59b6;
+        }
+        
+        .config-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .toggle-specs {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+        
+        .toggle-specs:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .toggle-specs i {
+            transition: transform 0.3s ease;
+        }
+        
+        .toggle-specs.active i {
+            transform: rotate(180deg);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .config-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>装机-爽</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="components.html"><i class="fas fa-microchip"></i> 电脑配件</a></li>
+                <li><a href="assembly.html"><i class="fas fa-tools"></i> 装机教程</a></li>
+                <li><a href="recommendations.html" class="active"><i class="fas fa-list-alt"></i> 配置推荐</a></li>
+                <li><a href="troubleshooting.html"><i class="fas fa-wrench"></i> 常见问题</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h2>电脑配置推荐</h2>
+            <p>根据不同预算和使用需求，为您提供几种精心搭配的电脑配置方案。</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="config-filter">
+            <button class="active" data-filter="all">全部配置</button>
+            <button data-filter="office">办公学习</button>
+            <button data-filter="gaming">游戏娱乐</button>
+            <button data-filter="design">设计创作</button>
+        </div>
+
+        <div class="config-container">
+            <!-- 入门办公配置 -->
+            <div class="config-card" data-type="office">
+                <div class="config-header">
+                    <h3>入门办公配置</h3>
+                    <p>适合日常办公、浏览网页和学习使用</p>
+                    <div class="price-tag">¥3,500 - 4,000</div>
+                </div>
+                <div class="config-body">
+                    <button class="toggle-specs"><i class="fas fa-chevron-down"></i> 查看详细配置</button>
+                    <div class="config-specs">
+                        <h4>配置清单</h4>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">处理器</div>
+                                <div class="spec-description">Intel i3-14100 / AMD Ryzen 5 7500U</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显卡</div>
+                                <div class="spec-description">集成显卡 / Arc A380</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-memory"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">内存</div>
+                                <div class="spec-description">16GB DDR5 5200MHz</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">存储</div>
+                                <div class="spec-description">512GB NVMe SSD</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">主板</div>
+                                <div class="spec-description">华硕 B760M / 技嘉 B650M</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">散热器</div>
+                                <div class="spec-description">利民 AX120 R SE / 九州风神 玄冰400</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">机箱</div>
+                                <div class="spec-description">先马 趣造 / 爱国者 T16</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">电源</div>
+                                <div class="spec-description">航嘉 GX450 / 鑫谷 GP500W</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显示器</div>
+                                <div class="spec-description">AOC 24英寸 1080P IPS / 小米 24英寸 75Hz</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">外设</div>
+                                <div class="spec-description">雷柏 键鼠套装 / 罗技 MK120</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>这套配置适合基础的办公和学习需求，使用2025年入门级硬件，可以流畅运行Office办公软件、浏览网页和观看高清视频。</p>
+                </div>
+                <div class="config-footer">
+                    <div class="config-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="rating-label">性价比</div>
+                    </div>
+                    <div class="config-tag tag-office">办公学习</div>
+                </div>
+            </div>
+
+            <!-- 中端游戏配置 -->
+            <div class="config-card" data-type="gaming">
+                <div class="config-header">
+                    <h3>中端游戏配置</h3>
+                    <p>适合玩大部分主流游戏和高效办公</p>
+                    <div class="price-tag">¥7,000 - 9,000</div>
+                </div>
+                <div class="config-body">
+                    <button class="toggle-specs"><i class="fas fa-chevron-down"></i> 查看详细配置</button>
+                    <div class="config-specs">
+                        <h4>配置清单</h4>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">处理器</div>
+                                <div class="spec-description">Intel i5-14600K / AMD Ryzen 7 8700X</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显卡</div>
+                                <div class="spec-description">NVIDIA RTX 4070 SUPER / AMD RX 8700 XT</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-memory"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">内存</div>
+                                <div class="spec-description">32GB DDR5 6000MHz</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">存储</div>
+                                <div class="spec-description">1TB PCIe 5.0 NVMe SSD + 2TB HDD</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">主板</div>
+                                <div class="spec-description">华硕 Z790 GAMING / 微星 B650 TOMAHAWK</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">散热器</div>
+                                <div class="spec-description">九州风神 阿萨辛3 / 利民 PA120 SE ARGB</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">机箱</div>
+                                <div class="spec-description">NZXT H5 Flow / 酷冷至尊 TD500 Mesh</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">电源</div>
+                                <div class="spec-description">振华 LEADEX G 750W / 海韵 GX750</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显示器</div>
+                                <div class="spec-description">华硕 VG27AQ 27英寸 1440P 170Hz / 三星 Odyssey G5</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">外设</div>
+                                <div class="spec-description">罗技 G502 HERO + G213 / 雷蛇 DeathAdder V2 + BlackWidow</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>这套配置可以流畅运行大多数2025年主流游戏，提供1440p高帧率或4K中等帧率游戏体验。同时也适合日常办公和基础设计工作。</p>
+                </div>
+                <div class="config-footer">
+                    <div class="config-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="rating-label">性价比</div>
+                    </div>
+                    <div class="config-tag tag-gaming">游戏娱乐</div>
+                </div>
+            </div>
+
+            <!-- 高端专业设计配置 -->
+            <div class="config-card" data-type="design">
+                <div class="config-header">
+                    <h3>高端专业设计配置</h3>
+                    <p>适合专业设计、3D渲染和视频剪辑工作</p>
+                    <div class="price-tag">¥20,000 - 25,000</div>
+                </div>
+                <div class="config-body">
+                    <button class="toggle-specs"><i class="fas fa-chevron-down"></i> 查看详细配置</button>
+                    <div class="config-specs">
+                        <h4>配置清单</h4>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">处理器</div>
+                                <div class="spec-description">Intel i9-14900KS / AMD Ryzen 9 8950X</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显卡</div>
+                                <div class="spec-description">NVIDIA RTX 5090 / RTX 5080 Ti</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-memory"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">内存</div>
+                                <div class="spec-description">64GB DDR5 7200MHz</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">存储</div>
+                                <div class="spec-description">2TB PCIe 5.0 NVMe SSD + 4TB NVMe SSD</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">主板</div>
+                                <div class="spec-description">华硕 ROG MAXIMUS Z890 / 微星 MEG X870 GODLIKE</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">散热器</div>
+                                <div class="spec-description">360mm一体式水冷 / 猫头鹰 NH-D15</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">机箱</div>
+                                <div class="spec-description">联力 O11 Dynamic EVO / 酷冷至尊 HAF 700 EVO</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">电源</div>
+                                <div class="spec-description">海韵 PRIME 1300W 钛金 / 美商海盗船 HX1200i</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显示器</div>
+                                <div class="spec-description">LG 32GQ950 4K 144Hz / 华硕 ProArt PA32UCG-K 专业显示器</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">外设</div>
+                                <div class="spec-description">罗技 MX Master 3 + MX Keys / 雷蛇 BlackWidow V4 Pro + Basilisk V3 Pro</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>这套顶级配置适合专业设计师和内容创作者，采用2025年最新硬件，可以轻松处理8K视频编辑、复杂的3D渲染和AI辅助创作任务。</p>
+                </div>
+                <div class="config-footer">
+                    <div class="config-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="rating-label">性价比</div>
+                    </div>
+                    <div class="config-tag tag-design">设计创作</div>
+                </div>
+            </div>
+
+            <!-- 旗舰级游戏配置 -->
+            <div class="config-card" data-type="gaming">
+                <div class="config-header">
+                    <h3>旗舰级游戏配置</h3>
+                    <p>适合高帧率4K游戏和直播</p>
+                    <div class="price-tag">¥18,000 - 22,000</div>
+                </div>
+                <div class="config-body">
+                    <button class="toggle-specs"><i class="fas fa-chevron-down"></i> 查看详细配置</button>
+                    <div class="config-specs">
+                        <h4>配置清单</h4>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">处理器</div>
+                                <div class="spec-description">Intel i9-14900K / AMD Ryzen 9 8900X</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显卡</div>
+                                <div class="spec-description">NVIDIA RTX 5080 / AMD RX 8900 XTX</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-memory"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">内存</div>
+                                <div class="spec-description">32GB DDR5 6400MHz</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">存储</div>
+                                <div class="spec-description">2TB PCIe 5.0 NVMe SSD + 4TB HDD</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">主板</div>
+                                <div class="spec-description">华硕 ROG STRIX Z790-E / 微星 MPG X870 CARBON WIFI</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">散热器</div>
+                                <div class="spec-description">海盗船 H150i ELITE LCD / 酷冷至尊 ML360 ILLUSION</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">机箱</div>
+                                <div class="spec-description">联力 O11 Dynamic / 追风者 P500A</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">电源</div>
+                                <div class="spec-description">ROG THOR 1000P2 / 海韵 FOCUS GX-850</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显示器</div>
+                                <div class="spec-description">LG 27GP950 4K 144Hz / 三星 Odyssey G7</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">外设</div>
+                                <div class="spec-description">罗技 G Pro X Superlight + G915 / 雷蛇 Viper V2 Pro + Huntsman V2</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>这套旗舰级配置使用2025年顶级游戏硬件，支持任何3A大作4K高帧率运行，同时进行4K游戏直播时也能保持流畅。</p>
+                </div>
+                <div class="config-footer">
+                    <div class="config-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="rating-label">性价比</div>
+                    </div>
+                    <div class="config-tag tag-gaming">游戏娱乐</div>
+                </div>
+            </div>
+
+            <!-- 商务办公配置 -->
+            <div class="config-card" data-type="office">
+                <div class="config-header">
+                    <h3>商务办公配置</h3>
+                    <p>适合专业办公和多任务处理</p>
+                    <div class="price-tag">¥6,000 - 8,000</div>
+                </div>
+                <div class="config-body">
+                    <button class="toggle-specs"><i class="fas fa-chevron-down"></i> 查看详细配置</button>
+                    <div class="config-specs">
+                        <h4>配置清单</h4>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">处理器</div>
+                                <div class="spec-description">Intel i7-14700 / AMD Ryzen 7 8700G</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显卡</div>
+                                <div class="spec-description">集成显卡 / RTX 4060</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-memory"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">内存</div>
+                                <div class="spec-description">32GB DDR5 5600MHz</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">存储</div>
+                                <div class="spec-description">1TB NVMe SSD</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">主板</div>
+                                <div class="spec-description">华硕 PRIME B760-PLUS / 微星 B650M MORTAR WIFI</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">散热器</div>
+                                <div class="spec-description">九州风神 大霜塔 / 利民 FC140</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">机箱</div>
+                                <div class="spec-description">恩杰 H510 Flow / 追风者 P360A</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">电源</div>
+                                <div class="spec-description">振华 LEADEX III 650W / 酷冷至尊 V650 Gold</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显示器</div>
+                                <div class="spec-description">戴尔 U2720Q 4K / 明基 PD2700U</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">外设</div>
+                                <div class="spec-description">罗技 MX Keys Mini + MX Anywhere 3 / 雷柏 MT750 Pro</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>这套2025年商务配置面向专业办公用户，提供出色的多任务处理能力和AI辅助功能，适合运行Office、多窗口工作环境，注重静音和稳定性。</p>
+                </div>
+                <div class="config-footer">
+                    <div class="config-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="rating-label">性价比</div>
+                    </div>
+                    <div class="config-tag tag-office">办公学习</div>
+                </div>
+            </div>
+
+            <!-- 内容创作配置 -->
+            <div class="config-card" data-type="design">
+                <div class="config-header">
+                    <h3>内容创作配置</h3>
+                    <p>适合视频创作和直播</p>
+                    <div class="price-tag">¥12,000 - 15,000</div>
+                </div>
+                <div class="config-body">
+                    <button class="toggle-specs"><i class="fas fa-chevron-down"></i> 查看详细配置</button>
+                    <div class="config-specs">
+                        <h4>配置清单</h4>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">处理器</div>
+                                <div class="spec-description">Intel i7-14700K / AMD Ryzen 9 8900</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显卡</div>
+                                <div class="spec-description">NVIDIA RTX 4080 SUPER / RTX 5070</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-memory"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">内存</div>
+                                <div class="spec-description">64GB DDR5 6000MHz</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">存储</div>
+                                <div class="spec-description">2TB NVMe SSD + 4TB HDD</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">主板</div>
+                                <div class="spec-description">华硕 ProArt Z790-CREATOR / 微星 MAG X870 TOMAHAWK WIFI</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">散热器</div>
+                                <div class="spec-description">ROG RYUO III 360 / 酷冷至尊 ML360R RGB</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">机箱</div>
+                                <div class="spec-description">Be Quiet! Pure Base 500DX / 追风者 P500A</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">电源</div>
+                                <div class="spec-description">海韵 FOCUS GX-850 / 振华 LEADEX III 850W</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显示器</div>
+                                <div class="spec-description">明基 PD3220U 4K / 戴尔 U3223QE</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">外设</div>
+                                <div class="spec-description">罗技 MX Master 3 + MX Keys / 微软 Surface人体工学键盘</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>这套2025年内容创作配置为视频博主和直播主打造，强大的多线程处理能力和先进的AI视频处理能力能够满足4K视频剪辑、直播和中度3D设计需求。</p>
+                </div>
+                <div class="config-footer">
+                    <div class="config-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="rating-label">性价比</div>
+                    </div>
+                    <div class="config-tag tag-design">设计创作</div>
+                </div>
+            </div>
+
+            <!-- 极简入门配置 -->
+            <div class="config-card" data-type="office">
+                <div class="config-header">
+                    <h3>极简入门配置</h3>
+                    <p>最低成本电脑入门方案</p>
+                    <div class="price-tag">¥2,500 - 3,000</div>
+                </div>
+                <div class="config-body">
+                    <button class="toggle-specs"><i class="fas fa-chevron-down"></i> 查看详细配置</button>
+                    <div class="config-specs">
+                        <h4>配置清单</h4>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">处理器</div>
+                                <div class="spec-description">Intel i3-14100F / AMD Ryzen 5 5600G</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显卡</div>
+                                <div class="spec-description">集成显卡 / GTX 1650</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-memory"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">内存</div>
+                                <div class="spec-description">8GB DDR5 4800MHz</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">存储</div>
+                                <div class="spec-description">512GB NVMe SSD</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">主板</div>
+                                <div class="spec-description">铭瑄 B760M / 微星 A520M-A PRO</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">散热器</div>
+                                <div class="spec-description">CPU原装散热器 / 雪豹 静音风扇</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">机箱</div>
+                                <div class="spec-description">航嘉 启航者 / 金河田 预见 N15</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">电源</div>
+                                <div class="spec-description">航嘉 MVP350W / 长城 400W</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显示器</div>
+                                <div class="spec-description">AOC 22B2H 22英寸 / 飞利浦 221V8 21.5英寸</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">外设</div>
+                                <div class="spec-description">双飞燕 KR-85 套装 / 达尔优 基础键鼠套装</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>这套配置以最低成本实现基本电脑功能，适合家庭上网、学生学习和预算极其有限的用户，可以满足基本办公和网页浏览需求。</p>
+                </div>
+                <div class="config-footer">
+                    <div class="config-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="rating-label">性价比</div>
+                    </div>
+                    <div class="config-tag tag-office">基础入门</div>
+                </div>
+            </div>
+
+            <!-- 全AMD生态系统 -->
+            <div class="config-card" data-type="gaming">
+                <div class="config-header">
+                    <h3>全AMD生态系统</h3>
+                    <p>AMD处理器和显卡的完美结合</p>
+                    <div class="price-tag">¥9,000 - 11,000</div>
+                </div>
+                <div class="config-body">
+                    <button class="toggle-specs"><i class="fas fa-chevron-down"></i> 查看详细配置</button>
+                    <div class="config-specs">
+                        <h4>配置清单</h4>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">处理器</div>
+                                <div class="spec-description">AMD Ryzen 9 8900X3D</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显卡</div>
+                                <div class="spec-description">AMD Radeon RX 8800 XT</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-memory"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">内存</div>
+                                <div class="spec-description">32GB DDR5 6000MHz</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">存储</div>
+                                <div class="spec-description">1TB NVMe SSD + 2TB HDD</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">主板</div>
+                                <div class="spec-description">华硕 ROG STRIX X870-E GAMING / 微星 MAG X870 TOMAHAWK WIFI</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">散热器</div>
+                                <div class="spec-description">技嘉 Waterforce 360 / 玄冰 400 PRO</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">机箱</div>
+                                <div class="spec-description">酷冷至尊 TD500 / 安钛克 DF700 FLUX</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">电源</div>
+                                <div class="spec-description">海韵 FOCUS 850W 金牌 / 酷冷至尊 V850 GOLD</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显示器</div>
+                                <div class="spec-description">三星 Odyssey G7 / 技嘉 M32U</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">外设</div>
+                                <div class="spec-description">罗技 G502 HERO + G913 TKL / 达尔优 V4 Pro + A87</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>这套全AMD配置充分利用AMD智能访问内存(SAM)和其他协同技术，发挥芯片组合的最大性能潜力，性价比极高。</p>
+                </div>
+                <div class="config-footer">
+                    <div class="config-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="rating-label">性价比</div>
+                    </div>
+                    <div class="config-tag tag-gaming">AMD生态</div>
+                </div>
+            </div>
+
+            <!-- AI开发工作站 -->
+            <div class="config-card" data-type="design">
+                <div class="config-header">
+                    <h3>AI开发工作站</h3>
+                    <p>专业人工智能开发和训练</p>
+                    <div class="price-tag">¥25,000 - 30,000</div>
+                </div>
+                <div class="config-body">
+                    <button class="toggle-specs"><i class="fas fa-chevron-down"></i> 查看详细配置</button>
+                    <div class="config-specs">
+                        <h4>配置清单</h4>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">处理器</div>
+                                <div class="spec-description">Intel i9-14900K / AMD Ryzen 9 8950X</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显卡</div>
+                                <div class="spec-description">NVIDIA RTX 5090 (24GB VRAM)</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-memory"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">内存</div>
+                                <div class="spec-description">128GB DDR5 6400MHz</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">存储</div>
+                                <div class="spec-description">4TB NVMe SSD + 12TB HDD</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">主板</div>
+                                <div class="spec-description">华硕 ProArt Z790 Creator / 微星 MEG Z790 ACE</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">散热器</div>
+                                <div class="spec-description">360mm AIO水冷 / 猫头鹰 NH-D15</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">机箱</div>
+                                <div class="spec-description">酷冷至尊 H500M / 联力 PC-O11 AIR</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">电源</div>
+                                <div class="spec-description">海韵 PRIME 1000W 白金 / 安钛克 HCG1000 Extreme</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显示器</div>
+                                <div class="spec-description">戴尔 U3224KB / LG 32UN880 4K</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">外设</div>
+                                <div class="spec-description">罗技 MX Master 3 + MX Keys / HHKB Professional Hybrid</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>这套配置专为AI开发者和研究人员设计，大容量显存和系统内存能够处理大型模型训练，支持本地部署中小型LLM和Stable Diffusion等AI模型。</p>
+                </div>
+                <div class="config-footer">
+                    <div class="config-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="rating-label">性价比</div>
+                    </div>
+                    <div class="config-tag tag-design">AI开发</div>
+                </div>
+            </div>
+
+            <!-- 家庭NAS服务器 -->
+            <div class="config-card" data-type="office">
+                <div class="config-header">
+                    <h3>家庭NAS服务器</h3>
+                    <p>家庭数据存储和媒体服务器</p>
+                    <div class="price-tag">¥8,000 - 12,000</div>
+                </div>
+                <div class="config-body">
+                    <button class="toggle-specs"><i class="fas fa-chevron-down"></i> 查看详细配置</button>
+                    <div class="config-specs">
+                        <h4>配置清单</h4>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">处理器</div>
+                                <div class="spec-description">Intel i3-14100 / AMD Ryzen 5 8600G</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显卡</div>
+                                <div class="spec-description">集成显卡（支持硬件转码）</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-memory"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">内存</div>
+                                <div class="spec-description">32GB DDR5 4800MHz ECC</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">存储</div>
+                                <div class="spec-description">4x 8TB NAS硬盘 (RAID 5/6配置)</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">主板</div>
+                                <div class="spec-description">华硕 TUF B760M-PLUS / 微星 B650M PRO-VDH WIFI</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">散热器</div>
+                                <div class="spec-description">猫头鹰 NH-L9i / 九州风神 AX120 R SE</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">机箱</div>
+                                <div class="spec-description">FractalDesign Node 804 / Silverstone CS381</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">电源</div>
+                                <div class="spec-description">海韵 FOCUS GX-550 / 振华 LEADEX III 550W 金牌</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显示器</div>
+                                <div class="spec-description">无（远程管理）/ 任意小型监视器</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">外设</div>
+                                <div class="spec-description">无线键鼠套装（仅用于初始设置）</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>这套配置专为家庭数据存储设计，可用作Plex媒体服务器、云盘备份和照片存储，支持多用户远程访问和流媒体传输。搭载多盘位机箱和RAID配置保障数据安全。</p>
+                </div>
+                <div class="config-footer">
+                    <div class="config-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="rating-label">性价比</div>
+                    </div>
+                    <div class="config-tag tag-office">服务器</div>
+                </div>
+            </div>
+
+            <!-- 超静音工作配置 -->
+            <div class="config-card" data-type="office">
+                <div class="config-header">
+                    <h3>超静音工作配置</h3>
+                    <p>追求极致安静的办公环境</p>
+                    <div class="price-tag">¥8,000 - 10,000</div>
+                </div>
+                <div class="config-body">
+                    <button class="toggle-specs"><i class="fas fa-chevron-down"></i> 查看详细配置</button>
+                    <div class="config-specs">
+                        <h4>配置清单</h4>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">处理器</div>
+                                <div class="spec-description">Intel i7-14700T / AMD Ryzen 7 8700</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显卡</div>
+                                <div class="spec-description">NVIDIA RTX 4060 (零噪音模式)</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-memory"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">内存</div>
+                                <div class="spec-description">32GB DDR5 5600MHz</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">存储</div>
+                                <div class="spec-description">2TB NVMe SSD (无机械硬盘)</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">主板</div>
+                                <div class="spec-description">华硕 ROG STRIX B760-I / 微星 MPG B650I EDGE WIFI</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">散热器</div>
+                                <div class="spec-description">猫头鹰 NH-D15S (无风扇模式) / 猫头鹰 NH-P1 被动散热</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">机箱</div>
+                                <div class="spec-description">Be Quiet! Silent Base 802 / 恩杰 H510 Flow (静音改装)</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">电源</div>
+                                <div class="spec-description">海韵 PRIME TX-650 (无风扇) / Be Quiet! Dark Power Pro 12 650W</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显示器</div>
+                                <div class="spec-description">戴尔 U2723QE 4K IPS / LG 32QN600 32英寸 QHD</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">外设</div>
+                                <div class="spec-description">罗技 MX Keys Mini + MX Master 3S / HHKB Professional Hybrid Type-S</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>这套配置使用全被动散热设计，低功耗组件，无风扇电源和特制消音机箱，噪音控制在20分贝以下，适合需要安静环境的专业人士、录音工作室和深夜工作者。</p>
+                </div>
+                <div class="config-footer">
+                    <div class="config-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="rating-label">性价比</div>
+                    </div>
+                    <div class="config-tag tag-office">超静音</div>
+                </div>
+            </div>
+
+            <!-- 苹果生态替代方案 -->
+            <div class="config-card" data-type="design">
+                <div class="config-header">
+                    <h3>苹果生态替代方案</h3>
+                    <p>媲美Mac Studio的Windows设计工作站</p>
+                    <div class="price-tag">¥15,000 - 18,000</div>
+                </div>
+                <div class="config-body">
+                    <button class="toggle-specs"><i class="fas fa-chevron-down"></i> 查看详细配置</button>
+                    <div class="config-specs">
+                        <h4>配置清单</h4>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">处理器</div>
+                                <div class="spec-description">Intel i9-14900K / AMD Ryzen 9 8950X</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显卡</div>
+                                <div class="spec-description">NVIDIA RTX 4080 SUPER / RTX 5070</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-memory"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">内存</div>
+                                <div class="spec-description">64GB DDR5 6400MHz</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">存储</div>
+                                <div class="spec-description">4TB NVMe SSD (高速读写)</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">主板</div>
+                                <div class="spec-description">华硕 ProArt Z790-CREATOR / 技嘉 X870 AERO G</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">散热器</div>
+                                <div class="spec-description">NZXT Kraken Elite 360 RGB / 海盗船 iCUE H150i ELITE LCD</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">机箱</div>
+                                <div class="spec-description">NZXT H7 Flow / 联力 PC-O11 Dynamic EVO 白色</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">电源</div>
+                                <div class="spec-description">海韵 PRIME 850W 白金 / 美商海盗船 HX850</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显示器</div>
+                                <div class="spec-description">LG UltraFine 32UN880 4K / 戴尔 U3223QE</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">外设</div>
+                                <div class="spec-description">罗技 MX Keys + MX Master 3 / HHKB + Logitech MX Vertical</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>这套配置针对从Mac迁移的设计师优化，搭配高色域4K显示器和Adobe创意套件，性能超越同价位Mac Studio，同时保留Windows生态优势，兼具美观和性能。</p>
+                </div>
+                <div class="config-footer">
+                    <div class="config-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="rating-label">性价比</div>
+                    </div>
+                    <div class="config-tag tag-design">设计工作站</div>
+                </div>
+            </div>
+
+            <!-- 迷你主机配置 -->
+            <div class="config-card" data-type="gaming">
+                <div class="config-header">
+                    <h3>迷你游戏主机</h3>
+                    <p>掌上游戏PC，5升超小体积</p>
+                    <div class="price-tag">¥8,000 - 10,000</div>
+                </div>
+                <div class="config-body">
+                    <button class="toggle-specs"><i class="fas fa-chevron-down"></i> 查看详细配置</button>
+                    <div class="config-specs">
+                        <h4>配置清单</h4>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">处理器</div>
+                                <div class="spec-description">Intel i7-14700F / AMD Ryzen 7 8800X3D</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显卡</div>
+                                <div class="spec-description">NVIDIA RTX 4070 ITX / RTX 4060 Ti ITX</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-memory"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">内存</div>
+                                <div class="spec-description">32GB DDR5 6000MHz SO-DIMM</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">存储</div>
+                                <div class="spec-description">2TB NVMe SSD M.2 2280</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">主板</div>
+                                <div class="spec-description">华硕 ROG STRIX Z790-I GAMING / 微星 MEG Z790I UNIFY</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">散热器</div>
+                                <div class="spec-description">猫头鹰 NH-L9i / ID-COOLING IS-47K</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">机箱</div>
+                                <div class="spec-description">DAN A4-SFX / 森泰 T7 / Ghost S1</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">电源</div>
+                                <div class="spec-description">海盗船 SF750 / 酷冷至尊 V850 SFX GOLD</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显示器</div>
+                                <div class="spec-description">便携式 4K 17英寸显示器 / 任意外接显示器</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">外设</div>
+                                <div class="spec-description">Xbox无线手柄 / 罗技 G915 TKL + G Pro X Superlight</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>这套超小体积游戏PC配置使用特制ITX机箱，体积仅为5升，可轻松放入背包携带，性能媲美大型台式机，支持4K游戏和VR体验，是LAN派对和移动游戏的理想选择。</p>
+                </div>
+                <div class="config-footer">
+                    <div class="config-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="rating-label">性价比</div>
+                    </div>
+                    <div class="config-tag tag-gaming">迷你PC</div>
+                </div>
+            </div>
+
+            <!-- 发烧级超频配置 -->
+            <div class="config-card" data-type="gaming">
+                <div class="config-header">
+                    <h3>发烧级超频配置</h3>
+                    <p>极限超频和定制水冷</p>
+                    <div class="price-tag">¥25,000 - 35,000</div>
+                </div>
+                <div class="config-body">
+                    <button class="toggle-specs"><i class="fas fa-chevron-down"></i> 查看详细配置</button>
+                    <div class="config-specs">
+                        <h4>配置清单</h4>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">处理器</div>
+                                <div class="spec-description">Intel i9-14900KS (Binned, 液氮超频)</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显卡</div>
+                                <div class="spec-description">NVIDIA RTX 5090 (硬改供电)</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-memory"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">内存</div>
+                                <div class="spec-description">64GB DDR5 8000MHz (严选颗粒)</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">存储</div>
+                                <div class="spec-description">4TB PCIe 5.0 NVMe SSD (RAID 0)</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">主板</div>
+                                <div class="spec-description">华硕 ROG MAXIMUS Z890 APEX / 华擎 Z790 AQUA OC</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">散热器</div>
+                                <div class="spec-description">定制硬管水冷 / EK-Quantum Power Kit</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">机箱</div>
+                                <div class="spec-description">技嘉 C700 GLASS / 联力 PC-O11 Dynamic XL ROG</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">电源</div>
+                                <div class="spec-description">ROG THOR 1600W 钛金 / 海盗船 AX1600i</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显示器</div>
+                                <div class="spec-description">华硕 ROG Swift PG32UQX 4K 144Hz / 三星 Odyssey Neo G9</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">外设</div>
+                                <div class="spec-description">雷蛇 Huntsman V3 Pro + Viper V3 Pro / 罗技 G915 + G Pro X Superlight 2</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>这套配置为极限超频爱好者设计，包含定制硬管水冷、顶级超频主板和1600W钛金电源，支持CPU 6.5GHz+超频和显卡超频，不考虑性价比，纯为追求极限性能。</p>
+                </div>
+                <div class="config-footer">
+                    <div class="config-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="rating-label">性价比</div>
+                    </div>
+                    <div class="config-tag tag-gaming">极限超频</div>
+                </div>
+            </div>
+
+            <!-- 多媒体编辑工作站 -->
+            <div class="config-card" data-type="design">
+                <div class="config-header">
+                    <h3>多媒体编辑工作站</h3>
+                    <p>专业音视频后期制作</p>
+                    <div class="price-tag">¥22,000 - 28,000</div>
+                </div>
+                <div class="config-body">
+                    <button class="toggle-specs"><i class="fas fa-chevron-down"></i> 查看详细配置</button>
+                    <div class="config-specs">
+                        <h4>配置清单</h4>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">处理器</div>
+                                <div class="spec-description">Intel i9-14900K / AMD Ryzen 9 8950X</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显卡</div>
+                                <div class="spec-description">NVIDIA RTX 5080 / AMD Radeon Pro W7900</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-memory"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">内存</div>
+                                <div class="spec-description">128GB DDR5 6400MHz</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">存储</div>
+                                <div class="spec-description">2TB NVMe SSD + 8TB SSD (媒体缓存) + 20TB 存储阵列</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">主板</div>
+                                <div class="spec-description">华硕 ProArt Z790 Creator / 技嘉 X870S AORUS MASTER</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">散热器</div>
+                                <div class="spec-description">NZXT Kraken Z73 RGB / 酷冷至尊 ML360 SUB-ZERO</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">机箱</div>
+                                <div class="spec-description">联力 Meshify 2 / 分形工艺 Define 7 XL</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">电源</div>
+                                <div class="spec-description">海韵 PRIME 1000W 白金 / 振华 LEADEX V G130X 1000W</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显示器</div>
+                                <div class="spec-description">LG 32EP950 4K OLED / 明基 SW321C 专业显示器</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">外设</div>
+                                <div class="spec-description">罗技 MX Keys + MX Master 3S / Loupedeck Live S + Wacom Intuos Pro</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>这套配置专为4K/8K视频编辑、音频后期和大型多媒体项目设计，配备专业音频接口和雷电扩展，满足高端影视制作需求，多层级存储系统确保素材安全和高效访问。</p>
+                </div>
+                <div class="config-footer">
+                    <div class="config-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="rating-label">性价比</div>
+                    </div>
+                    <div class="config-tag tag-design">影音制作</div>
+                </div>
+            </div>
+
+            <!-- 学生预算配置 -->
+            <div class="config-card" data-type="office">
+                <div class="config-header">
+                    <h3>学生预算配置</h3>
+                    <p>大学生学习&轻度游戏</p>
+                    <div class="price-tag">¥4,000 - 5,000</div>
+                </div>
+                <div class="config-body">
+                    <button class="toggle-specs">
+                        <i class="fas fa-chevron-down"></i> 查看详细配置
+                    </button>
+                    <div class="config-specs hidden">
+                        <h4>配置清单</h4>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">处理器</div>
+                                <div class="spec-description">Intel i5-14400F / AMD Ryzen 5 7600</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显卡</div>
+                                <div class="spec-description">NVIDIA RTX 3050 / AMD RX 6600</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-memory"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">内存</div>
+                                <div class="spec-description">16GB DDR5 5200MHz</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">存储</div>
+                                <div class="spec-description">1TB NVMe SSD</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">主板</div>
+                                <div class="spec-description">微星 B760M BOMBER / 华硕 TUF GAMING B650M-PLUS</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">散热器</div>
+                                <div class="spec-description">九州风神 玄冰 GT / 利民 SE 224 XT Basic</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">机箱</div>
+                                <div class="spec-description">安钛克 NX292 / 爱国者 黑暗骑士 T16</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">电源</div>
+                                <div class="spec-description">长城 GW-500SG / 华硕 TUF GAMING 550B</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">显示器</div>
+                                <div class="spec-description">AOC 24G2E 144Hz / 小米 27英寸 2K 165Hz</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <div class="spec-detail">
+                                <div class="spec-name">外设</div>
+                                <div class="spec-description">达尔优 A87 + A916 / 罗技 G102 + K280e</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>为学生预算优化的配置，能够满足学习、论文写作和程序设计需求，同时支持主流游戏和基础内容创作，性价比极高，特别适合预算有限的大学生使用。</p>
+                </div>
+                <div class="config-footer">
+                    <div class="config-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="rating-label">性价比</div>
+                    </div>
+                    <div class="config-tag tag-office">学生预算</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="cta">
+        <div class="container">
+            <h2>需要更专业的配置建议？</h2>
+            <p>我们可以根据您的具体需求和预算定制专属配置方案，让您的电脑更符合使用需求。</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn" id="contactUsBtn">联系我们 <i class="fas fa-envelope"></i></a>
+                <a href="assembly.html" class="btn btn-alt">开始装机 <i class="fas fa-tools"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>装机-爽</h2>
+                    <p>小白装机指南，让装机变得简单</p>
+                </div>
+                <div class="footer-links">
+                    <h3>快速导航</h3>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="components.html">电脑配件</a></li>
+                        <li><a href="assembly.html">装机教程</a></li>
+                        <li><a href="recommendations.html">配置推荐</a></li>
+                        <li><a href="troubleshooting.html">常见问题</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 装机-爽 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 筛选功能
+            const filterButtons = document.querySelectorAll('.config-filter button');
+            const configCards = document.querySelectorAll('.config-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // 更新按钮状态
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // 筛选配置卡片
+                    const filterValue = button.getAttribute('data-filter');
+                    
+                    configCards.forEach(card => {
+                        const cardType = card.getAttribute('data-type');
+                        
+                        if (filterValue === 'all' || filterValue === cardType) {
+                            card.style.display = 'flex';  // 使用flex确保卡片布局正确
+                            card.style.flexDirection = 'column';  // 保持卡片内部的布局
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // 折叠/展开功能
+            const toggleButtons = document.querySelectorAll('.toggle-specs');
+            
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const specsSection = button.nextElementSibling;
+                    specsSection.classList.toggle('active');
+                    button.classList.toggle('active');
+                    
+                    if (button.classList.contains('active')) {
+                        button.innerHTML = '<i class="fas fa-chevron-up"></i> 收起详细配置';
+                    } else {
+                        button.innerHTML = '<i class="fas fa-chevron-down"></i> 查看详细配置';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
